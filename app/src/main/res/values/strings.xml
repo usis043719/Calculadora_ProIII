@@ -3,6 +3,10 @@
     <string name="Calculadora">Calculadora</string>
     <string name="Num1">ingrese una cantidad</string>
     <string name="Num2">ingrese una cantidad</string>
+    <string-array name="Conversores">
+        <item>Seleccione un conversor</item>
+        <item></item>
+    </string-array>
 
 
 
