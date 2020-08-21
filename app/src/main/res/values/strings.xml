@@ -12,7 +12,8 @@
         <item>LEMPIRA</item>
         <item>YEN JAPONES</item>
     </string-array>
-    //////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////
     <string-array name="Masa">
         <item>KILOGRAMO</item>
         <item>GRAMO</item>
