@@ -5,7 +5,6 @@
     <string name="Num2">ingrese una cantidad</string>
     //esto sera lo que aparece en el combobox (spiner)
     <string-array name="Tiempo">
-        <item>Seleccione un conversor</item>
         <item>Milisegundos</item>
         <item>Segundos</item>
         <item>Minutos</item>
@@ -19,23 +18,25 @@
     </string-array>
 
     <string-array name="Transferencia">
-        <item>Seleccione un conversor</item>
-        <item>MegaBytes</item>
-        <item>KiloBytes</item>
-        <item>GigaBytes</item>
-        <item>TeraBytes</item>
-        <item>PentaBytes</item>
-        <item>ExaBytes</item>
-        <item>Bit</item>
-        <item>Byte</item>
-        <item>Zettabyte</item>
-        <item>Kilobit</item>
+        <item>MegaBytes/segundo</item>
+        <item>GigaBytes/segundo</item>
+        <item>Byte/segundo</item>
+        <item>MegaBytes/minuto</item>
+        <item>TeraBytes/minuto</item>
+        <item>Byte/minuto</item>
+        <item>MegaBytes/hora</item>
+        <item>TeraBytes/hora</item>
+        <item>Byte/hora</item>
+        <item>MegaBytes/dia</item>
+        <item>TeraBytes/dia</item>
+        <item>Byte/dia</item>
     </string-array>
 
     <string-array name="Temperatura">
-        <item>Seleccione un conversor</item>
-        <item>Celsius</item>
-        <item></item>
+        <item>Celsius o centigrados</item>
+        <item>Fahrenheit</item>
+        <item> Kelvin</item>
+        <item>Rankine</item>
     </string-array>
 
 

@@ -42,11 +42,11 @@ public class Tiempo_transferencia extends AppCompatActivity {
 
         double VALOR[][] = {
                 //TIEMPO
-                new double[]{1, 0.84,22.13,8.75,6.89,34.79,7.70,3.57,24.65,106.05},
+                new double[]{1, 0.001,0.0166667, 0.0166667,0.0416667,0.142857,0.230137,0.0833334,0.1,0.1},
                 //TRANSFERENCIA_DATOS
-                new double[]{1,1000,1e+6,1e+9,0.000984207,0.00110231,0.157473,2.20462,35.274,0.001},
+                new double[]{1,0.001,1.25e+8,6e-5,1e-6,1e+12, 6e-5, 1e-6, 1e+12, 2.4e-5, 1e-6, 1e+12},
                 //TEMPERATURA
-                new double[]{1,0.001,1000,0.219969,1.75975,3.51951,61.0237,0.0353147,67.628,0.264172},
+                new double[]{1, 33.8,255.928, 1.8, },
         };
         int DE = 0, A = 0; double RESPUESTA = 0;
         switch (ThbConversores.getCurrentTabTag()){//INDICE
@@ -76,4 +76,3 @@ public class Tiempo_transferencia extends AppCompatActivity {
         tmpVal.setText("RESPUESTA: "+ RESPUESTA);
     }
     }
-}
