@@ -1,46 +1,10 @@
 <resources>
-    <string name="app_name">CONVERSORES_V4.9.11</string>
-    <string-array name="Monedas">
-        <item>DOLAR</item>
-        <item>EURO</item>
-        <item>PESO MEXICANO</item>
-        <item>COLON SALVADOREÑO</item>
-        <item>BOLIVIANO</item>
-        <item>CORDOBA</item>
-        <item>QUETZAL</item>
-        <item>SOL PERUANO</item>
-        <item>LEMPIRA</item>
-        <item>YEN JAPONES</item>
-    </string-array>
+    <string name="app_name">Calculadora</string>
+    <string name="Calculadora">Calculadora</string>
+    <string name="Num1">ingrese una cantidad</string>
+    <string name="Num2">ingrese una cantidad</string>
 
-    /////////////////////////////////////////////////////////////
-    <string-array name="Masa">
-        <item>KILOGRAMO</item>
-        <item>GRAMO</item>
-        <item>MILIGRAMO</item>
-        <item>MICROGRAMO</item>
-        <item>TONELADA LARGA</item>
-        <item>TONELADA CORTA</item>
-        <item>STONE</item>
-        <item>LIBRA</item>
-        <item>ONZA</item>
-        <item>TONELADA (t)</item>
-    </string-array>
-    //////////////////////////////////////////////////////////
-    <string-array name="Volumen">
-        <item>LITRO</item>
-        <item>METRO CUBICO</item>
-        <item>MILILITRO</item>
-        <item>GALON IMPERIAL</item>
-        <item>PINTA IMPERIAL</item>
-        <item>TAZA IMPERIAL</item>
-        <item>PULGADA CUBICA</item>
-        <item>PIE CUBICO</item>
-        <item>CUCHARADA ESTADOUNIDENSE</item>
-        <item> GALON ESTADOUNIDENSE</item>
-    </string-array>
-    ///////////////////////////////////////////////
-    <string-array name="Longitud">
 
-    </string-array>
-</resources>
+
+
+    </resources>
