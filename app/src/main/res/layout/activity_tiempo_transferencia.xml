@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Tiempo_transferencia">
+    <TabHost
+        android:id="@+id/ThbConversores"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:orientation="horizontal" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                //////////////////////////////////////////////////////////////////////////
+
+                <RelativeLayout
+                    android:id="@+id/Tiempo"
+                    android:layout_width="match_parent"
+                    android:layout_height="667dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDETIEMPO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"
+                        android:text="DE:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spTIEMPO"
+                        android:layout_width="257dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="25dp"
+                        android:entries="@array/Tiempo" />
+
+                    <TextView
+                        android:id="@+id/tvATIEMPO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="90dp"
+                        android:text="A:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spATIEMPO"
+                        android:layout_width="257dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="80dp"
+                        android:entries="@array/Tiempo" />
+
+
+                </RelativeLayout>
+                ////////////////////////////////////////////////////////////////////////////////////
+
+                <RelativeLayout
+                    android:id="@+id/Transferncia_datos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDEDATOS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"
+                        android:text="DE:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spDATOS"
+                        android:layout_width="257dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="25dp"
+                        android:entries="@array/Transferencia" />
+
+                    <TextView
+                        android:id="@+id/tvADATOS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="90dp"
+                        android:text="A:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spADATOS"
+                        android:layout_width="257dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="80dp"
+                        android:entries="@array/Transferencia" />
+                </RelativeLayout>
+                //////////////////////////////////////////////////////////////////////////////////////////////////
+
+                <RelativeLayout
+                    android:id="@+id/Temperatura"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDETEMPERATURAS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"
+                        android:text="DE:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spDETEMPERATURAS"
+                        android:layout_width="257dp"
+                        android:layout_height="50dp"
+
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="25dp"
+                        android:entries="@array/Temperatura" />
+
+                    <TextView
+                        android:id="@+id/tvATEMPERATURA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="90dp"
+                        android:text="A:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spATEMPERATURA"
+                        android:layout_width="257dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="80dp"
+                        android:entries="@array/Temperatura" />
+                </RelativeLayout>
+                /////////////////////////////////////////////////////////////////
+
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+    /////////////////////////////////////////////////////////////////////
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/etCANTIDAD"
+            android:layout_width="394dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="200dp"
+            android:ems="10"
+            android:hint="INGRESE UNA CANTIDAD" />
+
+        <Button
+            android:id="@+id/btnCONVERTIR"
+            android:layout_width="283dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="250dp"
+            android:onClick="CONVERTIR"
+            android:text="CONVERTIR" />
+
+        <TextView
+            android:id="@+id/tvRESPUESTA"
+            android:layout_width="248dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="310dp"
+            android:text="RESPUESTA..." />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+
+            <Button
+                android:id="@+id/btnSIGUIENTE"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="150dp"
+                android:text="SIGUIENTE>>>" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

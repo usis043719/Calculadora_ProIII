@@ -3,12 +3,41 @@
     <string name="Calculadora">Calculadora</string>
     <string name="Num1">ingrese una cantidad</string>
     <string name="Num2">ingrese una cantidad</string>
-    <string-array name="Conversores">
+    //esto sera lo que aparece en el combobox (spiner)
+    <string-array name="Tiempo">
         <item>Seleccione un conversor</item>
+        <item>Milisegundos</item>
+        <item>Segundos</item>
+        <item>Minutos</item>
+        <item>Horas</item>
+        <item>Dias</item>
+        <item>Semanas</item>
+        <item>Meses</item>
+        <item>Años</item>
+        <item>Decadas</item>
+        <item>Siglos</item>
+    </string-array>
+
+    <string-array name="Transferencia">
+        <item>Seleccione un conversor</item>
+        <item>MegaBytes</item>
+        <item>KiloBytes</item>
+        <item>GigaBytes</item>
+        <item>TeraBytes</item>
+        <item>PentaBytes</item>
+        <item>ExaBytes</item>
+        <item>Bit</item>
+        <item>Byte</item>
+        <item>Zettabyte</item>
+        <item>Kilobit</item>
+    </string-array>
+
+    <string-array name="Temperatura">
+        <item>Seleccione un conversor</item>
+        <item>Celsius</item>
         <item></item>
     </string-array>
 
 
 
-
-    </resources>
+</resources>
