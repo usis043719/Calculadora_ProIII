@@ -75,4 +75,44 @@
         <item>MILLAS POR GALON(IMPERIAL)</item>
     </string-array>
 
+    /////////////////////////////////////////////////////////
+    <string-array name="Tiempo">
+        <item>Milisegundos</item>
+        <item>Segundos</item>
+        <item>Minutos</item>
+        <item>Horas</item>
+        <item>Dias</item>
+        <item>Semanas</item>
+        <item>Meses</item>
+        <item>Años</item>
+        <item>Decadas</item>
+        <item>Siglos</item>
+    </string-array>
+
+    ///////////////////////////////////////////////////////
+
+    <string-array name="Transferencia">
+        <item>MegaBytes/segundo</item>
+        <item>GigaBytes/segundo</item>
+        <item>Byte/segundo</item>
+        <item>MegaBytes/minuto</item>
+        <item>TeraBytes/minuto</item>
+        <item>Byte/minuto</item>
+        <item>MegaBytes/hora</item>
+        <item>TeraBytes/hora</item>
+        <item>Byte/hora</item>
+        <item>MegaBytes/dia</item>
+        <item>TeraBytes/dia</item>
+        <item>Byte/dia</item>
+    </string-array>
+
+    //////////////////////////////////////////////////////////
+
+    <string-array name="Temperatura">
+        <item>Celsius o centigrados</item>
+        <item>Fahrenheit</item>
+        <item> Kelvin</item>
+        <item>Rankine</item>
+    </string-array>
+
 </resources>
