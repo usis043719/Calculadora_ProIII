@@ -41,6 +41,38 @@
     </string-array>
     ///////////////////////////////////////////////
     <string-array name="Longitud">
-
+        <item>METRO</item>
+        <item>CENTRIMETRO</item>
+        <item>KILOMETRO</item>
+        <item>MILIMETRO</item>
+        <item>MICROMETRO</item>
+        <item>NANOMETRO</item>
+        <item>MILLA</item>
+        <item>YARDA</item>
+        <item>PIE</item>
+        <item>PULGADAS</item>
+        <item>MILLA NAUTICA</item>
     </string-array>
+    /////////////////////////////////////////////////
+    <string-array name="Almacenamiento">
+        <item>BIT</item>
+        <item>NIBBLE</item>
+        <item>KILOBIT</item>
+        <item>MEGABIT</item>
+        <item>GIGABIT</item>
+        <item>TERABIT</item>
+        <item>BYTE</item>
+        <item>KILOBYTE</item>
+        <item>MEGABYTE</item>
+        <item>TERABYTE</item>
+    </string-array>
+
+
+    //////////////////////////////////////////////////
+    <string-array name="Combustible">
+        <item>KILOMETRO POR LITRO</item>
+        <item>MILLA POR GALON AMERICANO</item>
+        <item>MILLAS POR GALON(IMPERIAL)</item>
+    </string-array>
+
 </resources>

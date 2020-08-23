@@ -1,16 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity3">
-    <LinearLayout
+    tools:context=".MainActivity3"
+    android:background="@drawable/fondo">
+
+    <TabHost
+        android:id="@+id/tbhConversores"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:orientation="horizontal" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                //////////////////////////////////////////////////////////////////////////
+
+                <RelativeLayout
+                    android:id="@+id/tabLONGITUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="667dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDLONGITUD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"
+                        android:text="DE:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spDLONGITUD"
+                        android:layout_width="257dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="25dp"
+                        android:entries="@array/Longitud" />
+
+                    <TextView
+                        android:id="@+id/tvALONGITUD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="90dp"
+                        android:text="A:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spALONGITUD"
+                        android:layout_width="257dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="80dp"
+                        android:entries="@array/Longitud" />
+
+
+                </RelativeLayout>
+                ////////////////////////////////////////////////////////////////////////////////////
+
+                <RelativeLayout
+                    android:id="@+id/tabALMACENAMIENTO"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDALMACENAMIENTO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"
+                        android:text="DE:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spDALMACENAMIENTO"
+                        android:layout_width="257dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="25dp"
+                        android:entries="@array/Almacenamiento" />
+
+                    <TextView
+                        android:id="@+id/tvAALMACENAMIENTO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="90dp"
+                        android:text="A:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spAALMACENAMIENTO"
+                        android:layout_width="257dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="80dp"
+                        android:entries="@array/Almacenamiento" />
+                </RelativeLayout>
+                //////////////////////////////////////////////////////////////////////////////////////////////////
+
+                <RelativeLayout
+                    android:id="@+id/tabCOMBUSTIBLE"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDCOMBUSTIBLE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"
+                        android:text="DE:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spDCOMBUSTIBLE"
+                        android:layout_width="257dp"
+                        android:layout_height="50dp"
+
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="25dp"
+                        android:entries="@array/Combustible" />
+
+                    <TextView
+                        android:id="@+id/tvACOMBUSTIBLE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="90dp"
+                        android:text="A:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spACOMBUSTIBLE"
+                        android:layout_width="257dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="80dp"
+                        android:entries="@array/Combustible" />
+                </RelativeLayout>
+
+
+                //////////////////////////////////////////////////////
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+    /////////////////////////////////////////////////////////////////////
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/etCANTIDAD"
+            android:layout_width="394dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="200dp"
+            android:ems="10"
+            android:hint="INGRESE UNA CANTIDAD" />
+
+        <Button
+            android:id="@+id/btnCONVERTIR"
+            android:layout_width="283dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="250dp"
+            android:onClick="CONVERTIR"
+            android:text="CONVERTIR" />
+
+        <TextView
+            android:id="@+id/tvRESPUESTA"
+            android:layout_width="248dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="310dp"
+            android:text="RESPUESTA..." />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
 
 
-    </LinearLayout>
-</LinearLayout>
+            <Button
+                android:id="@+id/btnSIGUIENTE"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="150dp"
+                android:text="SIGUIENTE>>>" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>
