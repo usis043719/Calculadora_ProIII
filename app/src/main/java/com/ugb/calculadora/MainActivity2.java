@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
     TabHost tbhConversores;
@@ -38,6 +39,7 @@ public class MainActivity2 extends AppCompatActivity {
         tbhConversores.addTab(tbhConversores.newTabSpec("VOLUMEN").setContent(R.id.tabVOLUMEN).setIndicator("Volumen"));
     }
     public void CONVERTIR(View v){
+        try {
         TextView tmpVal = (TextView)findViewById(R.id.etCANTIDAD);
         double CANTIDAD  = Double.parseDouble(tmpVal.getText().toString());
         Spinner SPINNER;
@@ -77,5 +79,10 @@ public class MainActivity2 extends AppCompatActivity {
         }
         tmpVal = (TextView)findViewById(R.id.tvRESPUESTA);
         tmpVal.setText("RESPUESTA: "+ RESPUESTA);
+        }catch (Exception err){
+            TextView temp = (TextView) findViewById(R.id.tvRESPUESTA);
+            temp.setText("POR FAVOR INGRESE UNA CANTIDAD");
+            Toast.makeText(getApplicationContext(),"INGRESE UNA CANTIDAD",Toast.LENGTH_LONG).show();
+        }
     }
 }

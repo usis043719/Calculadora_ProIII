@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity3 extends AppCompatActivity {
     TabHost tbhConversores;
@@ -38,6 +39,7 @@ public class MainActivity3 extends AppCompatActivity {
         tbhConversores.addTab(tbhConversores.newTabSpec("COMBUSTIBLE").setContent(R.id.tabCOMBUSTIBLE).setIndicator("Combustible"));
     }
     public void CONVERTIR(View v){
+        try {
         TextView tmpVal = (TextView)findViewById(R.id.etCANTIDAD);
         double CANTIDAD  = Double.parseDouble(tmpVal.getText().toString());
         Spinner SPINNER;
@@ -47,7 +49,7 @@ public class MainActivity3 extends AppCompatActivity {
                 //LONGITUD
                 new double[]{1,100,0.001,1000,1e+6,1e+9,0.000621371,1.09361,3.28084,39.3701,0.000539957},
                 //ALMACENAMIENTO
-                new double[]{1,0.25,9.77e-4,9.54e-7,9.31e-10,9.09e-13,0.13,1.22e-4,1.19e-7,1.14e-13},
+                new double[]{1,0.25,9.77e-4,9.54e-7,9.31e-10,1.0E-12,0.125,0.0001,1.25E-7,1.25E-13},
                 //CONSUMO DE COMBUSTIBLE
                 new double[]{1,2.352,2.825,},
         };
@@ -78,5 +80,10 @@ public class MainActivity3 extends AppCompatActivity {
         }
         tmpVal = (TextView)findViewById(R.id.tvRESPUESTA);
         tmpVal.setText("RESPUESTA: "+ RESPUESTA);
+        }catch (Exception err){
+            TextView temp = (TextView) findViewById(R.id.tvRESPUESTA);
+            temp.setText("POR FAVOR INGRESE UNA CANTIDAD");
+            Toast.makeText(getApplicationContext(),"INGRESE UNA CANTIDAD",Toast.LENGTH_LONG).show();
+        }
     }
 }
