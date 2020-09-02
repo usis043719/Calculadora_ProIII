@@ -2,6 +2,12 @@ package com.ugb.calculadora;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,158 +17,72 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-        public Button btnCalcular;
+    // declaración de variables
+    SensorManager sensorManager;
+    Sensor sensor;
+    SensorEventListener sensorEventListener;
+
+    // whip = látigo, es un archivo de audio.
+    int whip=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        final TextView sonido = (TextView)findViewById(R.id.tvSonido);
+        if(sensor == null) finish();
+        sensorEventListener = new SensorEventListener() {
 
-                btnCalcular = (Button) findViewById(R.id.BtnCalc);
-                btnCalcular.setOnClickListener(new View.OnClickListener()  {
-                    @Override
-                    public void onClick(View view) {
-
-                        Calcular(view);
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                float x = sensorEvent.values[0];
+                if(x < -5 && whip == 0){
+                    whip++;
+                    sonido.setText("Sonido "+whip);
+                    getWindow().getDecorView().setBackgroundColor(Color.BLUE);
+                }else if(x > 5 && whip == 1) {
+                    whip++;
+                    sonido.setText("Sonido "+whip);
+                    getWindow().getDecorView().setBackgroundColor(Color.YELLOW);
+                }
+                if(whip==2){
+                    whip=0;
+                    sound();
+                    sonido.setText("Sonido "+whip);
+                }
             }
-        });
-
-
-    }
-    public void Calcular (View view)
-    {
-        try {
-            RadioGroup optOperaciones = (RadioGroup) findViewById(R.id.optOperaciones);
-            Spinner CbOperaciones = (Spinner)findViewById(R.id.CbOperaciones);
-
-
-
-            TextView tempVal = (TextView) findViewById(R.id.Decimal1);
-            double num1 = Double.parseDouble(tempVal.getText().toString());
-
-            tempVal = (TextView) findViewById(R.id.Decimal2);
-            double num2 = Double.parseDouble(tempVal.getText().toString());
-
-            double respuesta = 0;
-
-            //este es para el Radiogroups y RadioButtons
-
-            switch (optOperaciones.getCheckedRadioButtonId()) {
-                case R.id.RbSuma:
-
-                    respuesta = num1 + num2;
-
-                    break;
-
-                case R.id.RbResta   :
-
-                    respuesta = num1 - num2;
-
-                    break;
-
-                case R.id.RbMult:
-
-                    respuesta = num1 * num2;
-
-                    break;
-
-                case R.id.RbDivic:
-
-                    respuesta = num1 / num2;
-
-                    break;
-
-                case R.id.RbPorcen:
-
-                    respuesta = (num1 * num2) / 100;
-
-                    break;
-
-                case R.id.RbExpo:
-
-                    respuesta = Math.pow(num1,num2);
-
-                    break;
-
-                case R.id.RbMod:
-
-                    respuesta = num1 % num2;
-                    break;
-
-
-                case R.id.RbFactor:
-
-                    int facto = 1;
-
-                    for (int i = 2; i<= num1; i++)
-
-                    {
-                        facto = facto * i;
-
-                        respuesta = facto;
-                    }
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
             }
-
-            //Este es para el Spinner----Combobox
-
-            switch (CbOperaciones.getSelectedItemPosition())
-            {
-                case 1:
-
-                    respuesta = num1 + num2;
-                    break;
-
-                case 2:
-
-                    respuesta = num1 - num2;
-                    break;
-
-                case 3:
-
-                    respuesta = num1 * num2;
-                    break;
-
-                case 4:
-
-                    respuesta = num1 / num2;
-                    break;
-
-                case 5:
-
-                    respuesta = (num1 * num2) / 100;
-                    break;
-
-                case 6:
-
-                    respuesta = Math.pow(num1,num2);
-                    break;
-
-                case 7:
-
-                    respuesta = num1 % num2;
-                    break;
-
-                case 8:
-
-                    int Facto = 1;
-
-                    for (int i = 2; i <= num1; i++)
-
-                    {
-                        Facto = Facto * i;
-
-                        respuesta = Facto;
-                    }
-            }
-
-            tempVal = (TextView) findViewById(R.id.LblRespuesta);
-            tempVal.setText("La respuesta es: " + respuesta);
-        } catch (Exception error) {
-
-            Toast.makeText(getApplicationContext(),"Ingrese los dos numeros", Toast.LENGTH_LONG).show();
-        }
+        }; // se agrega el punto y coma
+        star();
     }
 
-}
-//prueba
+    private void sound(){
+        MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.latigo);
+        mediaPlayer.start();
+    }
+      private void star(){
+
+        sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    private void stop(){
+        sensorManager.unregisterListener(sensorEventListener);
+    }
+    //agregar el sonido de látigo: hay que crear una carpeta dentro de la carpeta "res" a la que llamremos "raw" alli almacenaremos el sonido.
+    //¿Cómo se hace? Clic derecho en "app" New+Android resource directory/
+         @Override
+    protected void onPause() {
+        stop();
+        super.onPause();
+    }
+          @Override
+    protected void onResume() {
+        star();
+        super.onResume();
+    }
+
+  }
