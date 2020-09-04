@@ -8,129 +8,143 @@
     tools:context=".MainActivity"
     android:background="@drawable/fondo">
 
+    <TabHost
+        android:id="@+id/ThbConversores"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/TxTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/Calculadora" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/TxNum1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="50dp"
-        android:text="Num1" />
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:orientation="horizontal" />
 
-    <TextView
-        android:id="@+id/TxNum2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="120dp"
-        android:text="Num2" />
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                //////////////////////////////////////////////////////////////////////////
 
-    <EditText
-        android:id="@+id/Decimal1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="@string/Num1"
-        android:inputType="numberDecimal" />
+                <RelativeLayout
+                    android:id="@+id/Conversor_propio"
+                    android:layout_width="match_parent"
+                    android:layout_height="667dp"
+                    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/Decimal2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="110dp"
-        android:ems="10"
-        android:hint="@string/Num2"
-        android:inputType="numberDecimal" />
 
-    <Button
-        android:id="@+id/BtnCalc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="300dp"
-        android:text="Calcular" />
+                    <EditText
+                        android:id="@+id/etCANTIDAD"
+                        android:layout_width="394dp"
+                        android:layout_height="44dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:ems="10"
+                        android:hint="INGRESE LA CANTIDAD" />
 
-    <RadioGroup
-        android:id="@+id/optOperaciones"
-        android:layout_width="153dp"
-        android:layout_height="266dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="190dp">
 
-        <RadioButton
-            android:id="@+id/RbSuma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Suma " />
+                    <EditText
+                        android:id="@+id/etUNIDADES"
+                        android:layout_width="394dp"
+                        android:layout_height="44dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="80dp"
+                        android:ems="10"
+                        android:hint="INGRESE UNIDADES " />
 
-        <RadioButton
-            android:id="@+id/RbResta"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:text="Resta" />
+                    <EditText
+                        android:id="@+id/etUNIDADES2"
+                        android:layout_width="394dp"
+                        android:layout_height="44dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="140dp"
+                        android:ems="10"
+                        android:hint="INGRESE LA CANTIDAD " />
 
-        <RadioButton
-            android:id="@+id/RbDivic"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:text="Divicion " />
 
-        <RadioButton
-            android:id="@+id/RbMult"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:text="Multiplicacion " />
+                </RelativeLayout>
 
-        <RadioButton
-            android:id="@+id/RbExpo"
-            android:layout_width="142dp"
-            android:layout_height="wrap_content"
-            android:text="Exponenciacion" />
+                //////////////////////////////////////////////////////////////////////////////////////////////////
 
-        <RadioButton
-            android:id="@+id/RbPorcen"
-            android:layout_width="147dp"
-            android:layout_height="wrap_content"
-            android:text="Porcentaje" />
+                <RelativeLayout
+                    android:id="@+id/Conversor_Area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/RbMod"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Mood" />
+                    <TextView
+                        android:id="@+id/txtDEAREA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="60dp"
+                        android:text="DE:"
+                        android:textSize="20dp" />
 
-        <RadioButton
-            android:id="@+id/RbFactor"
-            android:layout_width="141dp"
-            android:layout_height="wrap_content"
-            android:text="Factorial " />
-    </RadioGroup>
+                    <Spinner
+                        android:id="@+id/spDEAREA"
+                        android:layout_width="257dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="50dp"
+                        />
 
-    <TextView
-        android:id="@+id/LblRespuesta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="90dp"
-        android:layout_marginTop="160dp"
-        android:text="respuesta" />
+                    <TextView
+                        android:id="@+id/txtA_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="110dp"
+                        android:text="A:"
+                        android:textSize="20dp" />
 
-    <Spinner
-        android:id="@+id/CbOperaciones"
-        android:layout_width="197dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="380dp"
-        android:entries="@array/operaciones"/>
+                    <Spinner
+                        android:id="@+id/spA_area"
+                        android:layout_width="257dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="100dp"
+                         />
+                </RelativeLayout>
+                /////////////////////////////////////////////////////////////////
 
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+    /////////////////////////////////////////////////////////////////////
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnCONVERTIR"
+            android:layout_width="351dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="280dp"
+
+            android:background="#009688"
+            android:text="CONVERTIR"
+            android:textColor="#FFFFFF" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+
+
+</RelativeLayout>
 </RelativeLayout>
