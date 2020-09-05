@@ -57,4 +57,28 @@ public class MainActivity extends Activity {
         }
     }
 
+}
+
+}
+
+    public void convertir(View v) {
+        try {
+            this.conversor = new Conversor();
+            int DE = ((Spinner) findViewById(R.id.spnDE)).getSelectedItemPosition();
+            int A = ((Spinner) findViewById(R.id.spnA)).getSelectedItemPosition();
+
+            double CANTIDAD = Double.parseDouble(((TextView) findViewById(R.id.etCANTIDADA)).getText().toString());
+            TextView tempVal = (TextView) findViewById(R.id.lblRESPUESTA);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Respuesta: ");
+            sb.append(this.conversor.convertir_area(DE, A, CANTIDAD));
+            tempVal.setText(sb.toString());
+
+        }catch (Exception err){
+            TextView temp = (TextView) findViewById(R.id.lblRESPUESTA);
+            temp.setText("POR FAVOR INGRESE UNA CANTIDAD");
+            Toast.makeText(getApplicationContext(),"INGRESE UNA CANTIDAD",Toast.LENGTH_LONG).show();
+        }
     }
+}
+

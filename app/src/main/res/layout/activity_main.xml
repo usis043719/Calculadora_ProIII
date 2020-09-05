@@ -31,6 +31,87 @@
                 android:layout_height="match_parent">
 
                 <RelativeLayout
+                    android:id="@+id/tabAREA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/efe"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvdearea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"
+                        android:text="DE:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spnDE"
+                        android:layout_width="257dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="25dp"
+
+                        android:entries="@array/Area" />
+
+                        android:entries="@array/Areas"
+                         />
+
+
+                    <TextView
+                        android:id="@+id/tvaarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="90dp"
+                        android:text="A:"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:id="@+id/spnA"
+                        android:layout_width="257dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="80dp"
+
+                       android:entries="@array/Area" />
+
+                        android:entries="@array/Areas"
+                         />
+
+                    <EditText
+                        android:id="@+id/etCANTIDADA"
+                        android:layout_width="394dp"
+                        android:layout_height="44dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="200dp"
+                        android:ems="10"
+                        android:hint="INGRESE UNA CANTIDAD" />
+
+                    <TextView
+                        android:id="@+id/lblRESPUESTA"
+                        android:layout_width="250dp"
+                        android:layout_height="152dp"
+                        android:layout_marginLeft="120dp"
+                        android:layout_marginTop="310dp"
+                        android:text="Respuesta:"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:id="@+id/btnCONVERTIR"
+                        android:layout_width="283dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="250dp"
+                        android:onClick="convertir"
+                        android:text="CONVERTIR" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/tabCONVERSORPROPIO"
                     android:layout_width="match_parent"
                     android:layout_height="674dp"
@@ -72,78 +153,6 @@
 
                 </RelativeLayout>
                 //////////////////////////////////////////////////////////////
-
-                <RelativeLayout
-                    android:id="@+id/tabAREA"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/efe"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/tvdearea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="40dp"
-                        android:text="DE:"
-                        android:textSize="20dp" />
-
-                    <Spinner
-                        android:id="@+id/spnDE"
-                        android:layout_width="257dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginTop="25dp"
-                        android:entries="@array/Areas"
-                         />
-
-                    <TextView
-                        android:id="@+id/tvaarea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="90dp"
-                        android:text="A:"
-                        android:textSize="20dp" />
-
-                    <Spinner
-                        android:id="@+id/spnA"
-                        android:layout_width="257dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginTop="80dp"
-                        android:entries="@array/Areas"
-                         />
-
-                    <EditText
-                        android:id="@+id/etCANTIDADA"
-                        android:layout_width="394dp"
-                        android:layout_height="44dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="200dp"
-                        android:ems="10"
-                        android:hint="INGRESE UNA CANTIDAD" />
-
-                    <TextView
-                        android:id="@+id/lblRESPUESTA"
-                        android:layout_width="250dp"
-                        android:layout_height="152dp"
-                        android:layout_marginLeft="120dp"
-                        android:layout_marginTop="310dp"
-                        android:text="Respuesta:" />
-
-                    <Button
-                        android:id="@+id/btnCONVERTIR"
-                        android:layout_width="283dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="250dp"
-                        android:text="CONVERTIR" />
-
-                </RelativeLayout>
 
             </FrameLayout>
         </LinearLayout>
