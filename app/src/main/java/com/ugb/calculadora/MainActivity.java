@@ -46,7 +46,19 @@ public class MainActivity extends Activity {
             sb.append(CANTIDAD % UNIDADES);
             valor.setText(sb.toString());
 
+        }
+        else if (!valor.getText().toString().equals(str))
+        {
+            String[] data = valor.getText().toString().split(str2);
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(str);
+            sb2.append((Integer.parseInt(data[0]) * UNIDADES) + Integer.parseInt(data[1]));
+            temp2.setText(sb2.toString());
+        }
     }
+
+}
+
 }
 
     public void convertir(View v) {

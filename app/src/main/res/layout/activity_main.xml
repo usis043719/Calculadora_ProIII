@@ -53,7 +53,12 @@
                         android:layout_height="50dp"
                         android:layout_marginLeft="80dp"
                         android:layout_marginTop="25dp"
+
                         android:entries="@array/Area" />
+
+                        android:entries="@array/Areas"
+                         />
+
 
                     <TextView
                         android:id="@+id/tvaarea"
@@ -70,7 +75,11 @@
                         android:layout_height="45dp"
                         android:layout_marginLeft="80dp"
                         android:layout_marginTop="80dp"
-                        android:entries="@array/Area" />
+
+                       android:entries="@array/Area" />
+
+                        android:entries="@array/Areas"
+                         />
 
                     <EditText
                         android:id="@+id/etCANTIDADA"

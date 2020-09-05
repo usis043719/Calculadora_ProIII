@@ -16,6 +16,7 @@
     <item>factorial</item>
     </string-array>
 
+
     <string-array name="Area">
         <item>Pie Cuadrado</item>
         <item>Vara Cuadrada</item>
@@ -24,7 +25,21 @@
         <item>Tareas</item>
         <item>Manzana</item>
         <item>Hectaria</item>
+
     </string-array>
 
 
-    </resources>
+    <string-array name="Areas">
+        <item>Pie cuadrado</item>
+        <item>Vara cuadrada</item>
+        <item>Yarda cuadrada</item>
+        <item>Metro cuadrado</item>
+        <item>Tareas</item>
+        <item>Manzana</item>
+        <item>Hectáreas</item>
+
+    </string-array>
+
+
+
+</resources>
