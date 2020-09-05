@@ -5,8 +5,8 @@
     <string name="Num2">ingrese una cantidad</string>
 
     <string-array name="operaciones">
-    <item>selecionar:</item>
-    <item>suma </item>
+        <item>selecionar:</item>
+        <item>suma </item>
     <item>resta </item>
     <item>divicion </item>
     <item>multiplicacion</item>
@@ -14,10 +14,16 @@
     <item>porcentaje</item>
     <item>mood</item>
     <item>factorial</item>
+    </string-array>
 
-
-
-
+    <string-array name="Area">
+        <item>Pie Cuadrado</item>
+        <item>Vara Cuadrada</item>
+        <item>Yarda Cuadrada</item>
+        <item>Metro Cuadrado</item>
+        <item>Tareas</item>
+        <item>Manzana</item>
+        <item>Hectaria</item>
     </string-array>
 
 
