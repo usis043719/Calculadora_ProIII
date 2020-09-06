@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         tbhConversor.addTab(tbhConversor.newTabSpec(str2).setIndicator(str2, null).setContent(R.id.tabAREA));
     }
     public void procesar(View v) {
-
+///
         TextView temp = (TextView) findViewById(R.id.etUNIDADES);
         String str = "";
         int UNIDADES = temp.getText().toString().equals(str) ? 1 : Integer.parseInt(temp.getText().toString());
