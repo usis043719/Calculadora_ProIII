@@ -36,8 +36,7 @@ public class MainActivity extends Activity {
         TextView temp2 = (TextView) findViewById(R.id.etCANTIDAD);
         TextView valor = (TextView) findViewById(R.id.etUNIDADES2);
         String str2 = "/";
-        if (!temp2.getText().toString().equals(str))
-        {
+        if (!temp2.getText().toString().equals(str)) {
             int CANTIDAD = Integer.parseInt(temp2.getText().toString());
             int CAJAS = CANTIDAD / UNIDADES;
             StringBuilder sb = new StringBuilder();
@@ -45,7 +44,6 @@ public class MainActivity extends Activity {
             sb.append(str2);
             sb.append(CANTIDAD % UNIDADES);
             valor.setText(sb.toString());
-
         }
         else if (!valor.getText().toString().equals(str))
         {

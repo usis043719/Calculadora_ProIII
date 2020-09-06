@@ -11,12 +11,13 @@
         android:id="@+id/tbhCONVERSORES"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
 
             <TabWidget
                 android:id="@android:id/tabs"
@@ -32,9 +33,9 @@
 
                 <RelativeLayout
                     android:id="@+id/tabAREA"
+                    android:background="@drawable/vc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/efe"
                     android:orientation="vertical"
                     android:padding="10dp">
 
@@ -53,12 +54,7 @@
                         android:layout_height="50dp"
                         android:layout_marginLeft="80dp"
                         android:layout_marginTop="25dp"
-
                         android:entries="@array/Area" />
-
-                        android:entries="@array/Areas"
-                         />
-
 
                     <TextView
                         android:id="@+id/tvaarea"
@@ -75,11 +71,7 @@
                         android:layout_height="45dp"
                         android:layout_marginLeft="80dp"
                         android:layout_marginTop="80dp"
-
-                       android:entries="@array/Area" />
-
-                        android:entries="@array/Areas"
-                         />
+                        android:entries="@array/Area" />
 
                     <EditText
                         android:id="@+id/etCANTIDADA"
@@ -105,9 +97,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="50dp"
+                        android:background="@drawable/btn_color"
                         android:layout_marginTop="250dp"
                         android:onClick="convertir"
-                        android:text="CONVERTIR" />
+                        android:text="CONVERTIR"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="18dp" />
 
                 </RelativeLayout>
 
@@ -116,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="674dp"
                     android:orientation="vertical"
-
+                    android:background="@drawable/fondo"
                     android:padding="10dp">
 
                     <EditText
@@ -148,8 +143,10 @@
                         android:layout_width="396dp"
                         android:layout_height="73dp"
                         android:layout_marginTop="240dp"
+                        android:background="@drawable/btn_color"
                         android:onClick="procesar"
-                        android:text="Convertir" />
+                        android:text="Convertir"
+                        android:textColor="@android:color/background_light" />
 
                 </RelativeLayout>
                 //////////////////////////////////////////////////////////////
