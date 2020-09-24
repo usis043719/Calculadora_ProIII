@@ -1,6 +1,24 @@
 <resources>
-    <string name="app_name">Tienda_Online</string>
+    <string name="app_name">Calculadora</string>
+    <string name="Calculadora">Calculadora</string>
+    <string name="Num1">ingrese una cantidad</string>
+    <string name="Num2">ingrese una cantidad</string>
+
+    <string-array name="operaciones">
+    <item>selecionar:</item>
+    <item>suma </item>
+    <item>resta </item>
+    <item>divicion </item>
+    <item>multiplicacion</item>
+    <item>exponenciacion</item>
+    <item>porcentaje</item>
+    <item>mood</item>
+    <item>factorial</item>
 
 
 
-</resources>
+
+    </string-array>
+
+
+    </resources>
