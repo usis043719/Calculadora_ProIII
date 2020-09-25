@@ -37,15 +37,25 @@ public class agregar_Productos extends AppCompatActivity {
 
                 String[] data = {idProducto,nombre,marca,categoria,precio};
 
-               // miDB = new DB(getApplicationContext(),"", null, 1);
-               // miDB.mantenimientoProductos(accion, data);
+                miDB = new DB(getApplicationContext(),"", null, 1);
+                miDB.mantenimientoproductos(accion, data);
 
-                Toast.makeText(getApplicationContext(),"Registro de producto insertado con exito", Toast.LENGTH_LONG).show();
-                Intent mostrarProductos = new Intent(agregar_Productos.this, MainActivity.class);
-                startActivity(mostrarProductos);
+                Toast.makeText(getApplicationContext(),"REGISTRO INSERTADO CON EXITO!!!", Toast.LENGTH_LONG).show();
+                mostrarListaProductos();
+            }
+        });
+        btnGuardarProducto = (Button)findViewById(R.id.btnMostrarProducto);
+        btnGuardarProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarListaProductos();
             }
         });
         mostrarDatosProducto();
+    }
+    void mostrarListaProductos(){
+        Intent mostrarProductos = new Intent(agregar_Productos.this, MainActivity.class);
+        startActivity(mostrarProductos);
     }
     void mostrarDatosProducto(){
         try {

@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 public class DB extends SQLiteOpenHelper {
-    static String nameDB = "db_tienda";
-    static String tblProductos = "CREATE TABLE productos(idProducto integer primary key autoincrement, Producto text, Descripcion text, Caracteristicas text, Precio text)";
+    static String nameDB = "db_productos";
+    static String tblProductos = "CREATE TABLE productos(idProducto integer primary key autoincrement, nombre text, marca text, categoria text, Precio text)";
 
     public DB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, nameDB, factory, version);
@@ -32,10 +32,10 @@ public class DB extends SQLiteOpenHelper {
                 cursor=sqLiteDatabaseReadable.rawQuery("SELECT * FROM productos ORDER BY nombre ASC", null);
                 break;
             case "nuevo":
-                sqLiteDatabaseWritable.execSQL("INSERT INTO productos (Producto, Descripcion, Caracteristicas, Precio) VALUES('"+ data[1] +"','"+data[2]+"','"+data[3]+"','"+data[4]+"')");
+                sqLiteDatabaseWritable.execSQL("INSERT INTO productos (nombre, marca, categoria, Precio) VALUES('"+ data[1] +"','"+data[2]+"','"+data[3]+"','"+data[4]+"')");
                 break;
             case "modificar":
-                sqLiteDatabaseWritable.execSQL("UPDATE productos SET Producto='"+ data[1] +"',Descripcion='"+data[2]+"',Caracteristicas='"+data[3]+"',Precio='"+data[4]+"' WHERE idProductos='"+data[0]+"'");
+                sqLiteDatabaseWritable.execSQL("UPDATE productos SET nombre='"+ data[1] +"',marca='"+data[2]+"',categoria='"+data[3]+"',precio='"+data[4]+"' WHERE idProducto='"+data[0]+"'");
                 break;
             case "eliminar":
                 sqLiteDatabaseWritable.execSQL("DELETE FROM productos WHERE idProducto='"+ data[0] +"'");

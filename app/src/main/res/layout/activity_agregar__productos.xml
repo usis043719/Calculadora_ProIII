@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/imagen2"
+    android:background="@drawable/imagen3"
     android:padding="10dp"
     tools:context=".agregar_Productos">
 
@@ -41,15 +41,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="320dp"
-        android:text="Guardar Producto" />
+        android:background="@drawable/btn_color"
+        android:text="Guardar Producto"
+        android:textColor="@color/design_default_color_background" />
 
     <Button
         android:id="@+id/btnMostrarProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="370dp"
-        android:text="Mostrar Productos" />
-
+        android:background="@drawable/btn_color"
+        android:text="Mostrar Productos"
+        android:textColor="@color/design_default_color_background" />
 
 
 </RelativeLayout>
