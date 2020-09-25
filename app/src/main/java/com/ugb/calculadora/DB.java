@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 public class DB extends SQLiteOpenHelper {
     static String nameDB = "db_productos";
     static String tblProductos = "CREATE TABLE productos(idProducto integer primary key autoincrement, nombre text, marca text, categoria text, Precio text)";
-
+//
     public DB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, nameDB, factory, version);
     }
