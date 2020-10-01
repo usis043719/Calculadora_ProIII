@@ -9,7 +9,26 @@
     android:background="@drawable/fondo">
 
 
+    <ListView
+        android:id= "@+id/ltsagenda"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools: layout_editor_absoluteX= "161dp"
+        tools: layout_editor_absoluteY= "312dp" />
 
-    
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnagregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="19dp"
+            android:layout_marginEnd="13dp"
+            android:clickable="true"
+            android:src="@android:drawable/ic_input_add"
+            app:backgroundTint="?attr/colorBackgroundFloating" />
+
+
+    </ListView>
 </RelativeLayout>
