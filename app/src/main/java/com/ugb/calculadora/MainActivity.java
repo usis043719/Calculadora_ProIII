@@ -14,4 +14,3 @@ public class MainActivity extends AppCompatActivity {
         public Button btnCalcular;
 
 }
-//prueba
