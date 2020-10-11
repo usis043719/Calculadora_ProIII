@@ -1,5 +1,6 @@
 package com.ugb.calculadora;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -7,7 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,6 +22,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         obtenerDatostienda objObtenerproductos =new obtenerDatostienda();
         objObtenerproductos.execute();
     }
+
     private class obtenerDatostienda extends AsyncTask<Void,Void, String>{
         HttpURLConnection urLconection;
         @Override
@@ -89,5 +99,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Error al mostrar los datos: " + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-
 }
+
+
+
