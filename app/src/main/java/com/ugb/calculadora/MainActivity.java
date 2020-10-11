@@ -26,13 +26,14 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-
+//https://developer.android.com/training/camera/photobasics?hl=es-419#java
 public class MainActivity extends AppCompatActivity {
-    DB miBD;
-    Cursor misProductos;
-    ArrayList<String> stringArrayList = new ArrayList<String>();
-    ArrayList<String> copyStringArrayList = new ArrayList<String>();
-    ArrayAdapter<String> stringArrayAdapter;
+        DB miBD;
+        Cursor misProductos;
+        Productos Producto;
+        ArrayList<Productos> stringArrayList = new ArrayList<Productos>();
+        ArrayList<Productos> copyStringArrayList = new ArrayList<Productos>();
+    ListView ltsProductos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 agregarProducto("nuevo", new String[]{});
             }
         });
-        obtenerDatosProductos();
-        buscarProductos();
+        obtenerDatosproductos();
+        buscarproducto();
     }
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         misProductos.moveToPosition(adapterContextMenuInfo.position);
         menu.setHeaderTitle(misProductos.getString(1));
     }
-    void buscarProductos(){
+    void buscarproducto(){
         final TextView tempVal = (TextView)findViewById(R.id.txtBuscarProducto);
         tempVal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,17 +70,23 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                stringArrayList.clear();
-                if( tempVal.getText().toString().trim().length()<1 ){//no hay texto para buscar
-                    stringArrayList.addAll(copyStringArrayList);
-                } else{//hacemos la busqueda
-                    for (String producto : copyStringArrayList){
-                        if(producto.toLowerCase().contains(tempVal.getText().toString().trim().toLowerCase())){
-                            stringArrayList.add(producto);
+                try {
+                    stringArrayList.clear();
+                    if (tempVal.getText().toString().trim().length() < 1) {//no hay texto para buscar
+                        stringArrayList.addAll(copyStringArrayList);
+                    } else {//hacemos la busqueda
+                        for (Productos am : copyStringArrayList) {
+                            String nombre = am.getNombre();
+                            if (nombre.toLowerCase().contains(tempVal.getText().toString().trim().toLowerCase())) {
+                                stringArrayList.add(am);
+                            }
                         }
                     }
+                    AdaptadorImagenes adaptadorImg = new AdaptadorImagenes(getApplicationContext(), stringArrayList);
+                    ltsProductos.setAdapter(adaptadorImg);
+                }catch (Exception ex){
+                    Toast.makeText(getApplicationContext(), "Error: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
-                stringArrayAdapter.notifyDataSetChanged();
             }
             @Override
             public void afterTextChanged(Editable editable) {
@@ -97,18 +104,19 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.mnxModificar:
                 String[] dataProducto = {
-                        misProductos.getString(0),//idProducto
+                        misProductos.getString(0),//idAmigo
                         misProductos.getString(1),//nombre
                         misProductos.getString(2),//marca
                         misProductos.getString(3),//categoria
-                        misProductos.getString(4) //precio
+                        misProductos.getString(4), //precio
+                        misProductos.getString(5)  //urlImg
                 };
                 agregarProducto("modificar",dataProducto);
                 return true;
 
             case R.id.mnxEliminar:
-                AlertDialog eliminarproducto =  eliminarproducto();
-                eliminarproducto.show();
+                AlertDialog eliminarprdu =  eliminarproducto();
+                eliminarprdu.show();
                 return true;
 
             default:
@@ -123,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 miBD.mantenimientoproductos("eliminar",new String[]{misProductos.getString(0)});
-                obtenerDatosProductos();
-                Toast.makeText(getApplicationContext(), "PRODUCTO ELIMINADO CON EXITO",Toast.LENGTH_SHORT).show();
+                obtenerDatosproductos();
+                Toast.makeText(getApplicationContext(), "Amigo eliminado con exito.",Toast.LENGTH_SHORT).show();
                 dialogInterface.dismiss();
             }
         });
@@ -137,13 +145,13 @@ public class MainActivity extends AppCompatActivity {
         });
         return confirmacion.create();
     }
-    void obtenerDatosProductos(){
+    void obtenerDatosproductos(){
         miBD = new DB(getApplicationContext(), "", null, 1);
         misProductos = miBD.mantenimientoproductos("consultar", null);
         if( misProductos.moveToFirst() ){ //hay registro en la BD que mostrar
-            mostrarDatosProductos();
+            mostrarDatosproductos();
         } else{ //No tengo registro que mostrar.
-            Toast.makeText(getApplicationContext(), "NO HAY REGISTROS DE PRODUCTOS",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "No hay registros de amigos que mostrar",Toast.LENGTH_LONG).show();
             agregarProducto("nuevo", new String[]{});
         }
     }
@@ -151,23 +159,83 @@ public class MainActivity extends AppCompatActivity {
         Bundle enviarParametros = new Bundle();
         enviarParametros.putString("accion",accion);
         enviarParametros.putStringArray("dataProducto",dataProducto);
-        Intent agregar_Productos = new Intent(MainActivity.this, agregar_Productos.class);
-        agregar_Productos.putExtras(enviarParametros);
-        startActivity(agregar_Productos);
+        Intent agregarProductos = new Intent(MainActivity.this, agregar_Productos.class);
+        agregarProductos.putExtras(enviarParametros);
+        startActivity(agregarProductos);
     }
-    void mostrarDatosProductos(){
+    void mostrarDatosproductos(){
         stringArrayList.clear();
-        ListView ltsProductos = (ListView)findViewById(R.id.ltsProductos);
-        stringArrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, stringArrayList);
-        ltsProductos.setAdapter(stringArrayAdapter);
+        ltsProductos = (ListView)findViewById(R.id.ltsProductos);
         do {
-            stringArrayList.add(misProductos.getString(1));
+            Producto = new Productos(misProductos.getString(0),misProductos.getString(1), misProductos.getString(2), misProductos.getString(3), misProductos.getString(4), misProductos.getString(5));
+            stringArrayList.add(Producto);
         }while(misProductos.moveToNext());
+        AdaptadorImagenes adaptadorImg = new AdaptadorImagenes(getApplicationContext(), stringArrayList);
+        ltsProductos.setAdapter(adaptadorImg);
 
-        copyStringArrayList.clear();//limpiamos la lista de productos
-        copyStringArrayList.addAll(stringArrayList);//creamos la copia de la lista de productos...
-
-        stringArrayAdapter.notifyDataSetChanged();
+        copyStringArrayList.clear();//limpiamos la lista de amigos
+        copyStringArrayList.addAll(stringArrayList);//creamos la copia de la lista de amigos...
         registerForContextMenu(ltsProductos);
+    }
+}
+class Productos{
+    String id;
+    String nombre;
+    String marca;
+    String categoria;
+    String precio;
+    String urlImg;
+
+    public Productos(String id, String nombre, String marca, String categoria, String precio, String urlImg) {
+        this.id = id;
+        this.nombre = nombre;
+        this.marca  = marca;
+        this.categoria = categoria;
+        this.precio = precio;
+        this.urlImg = urlImg;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre() { return nombre; }
+
+    public void setNombre(String codigo) { this.nombre = nombre;}
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 }

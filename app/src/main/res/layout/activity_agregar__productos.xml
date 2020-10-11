@@ -8,39 +8,46 @@
     android:padding="10dp"
     tools:context=".agregar_Productos">
 
+    <ImageView
+        android:id="@+id/imgFotoProduc"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="150dp"
+        />
     <EditText
         android:id="@+id/txtNombreProducto"
         android:layout_width="396dp"
         android:layout_height="58dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="140dp"
         android:hint="Nombre" />
 
     <EditText
         android:id="@+id/txtMarcaproducto"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="210dp"
         android:hint="Marca" />
 
     <EditText
         android:id="@+id/txtCategoriaProducto"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="280dp"
         android:hint="Categoria" />
 
     <EditText
         android:id="@+id/txtPrecioProducto"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="245dp"
+        android:layout_marginTop="350dp"
         android:hint="Precio" />
 
     <Button
         android:id="@+id/btnGuardarProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="420dp"
         android:background="@drawable/btn_color"
         android:text="Guardar Producto"
         android:textColor="@color/design_default_color_background" />
@@ -49,7 +56,7 @@
         android:id="@+id/btnMostrarProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="370dp"
+        android:layout_marginTop="450dp"
         android:background="@drawable/btn_color"
         android:text="Mostrar Productos"
         android:textColor="@color/design_default_color_background" />
