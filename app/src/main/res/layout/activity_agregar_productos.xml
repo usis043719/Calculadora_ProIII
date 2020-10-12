@@ -13,14 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:hint="Nombre del producto"
-        android:textColor="#FFFFFF" />
+        android:textColor="#1B1919" />
 
     <EditText
         android:id="@+id/txtMarca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:hint="Marca" />
+        android:hint="Marca"
+        android:textColor="#1B1A1A" />
 
     <EditText
         android:id="@+id/txtCategoria"
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
         android:hint="Categoria"
-        android:textColor="#FFFFFF" />
+        android:textColor="#1C1A1A" />
 
     <EditText
         android:id="@+id/txtPrecio"
@@ -37,7 +38,7 @@
         android:layout_marginTop="240dp"
         android:hint="Precio"
         android:textColor="@color/colorAccent"
-        android:textColorHighlight="#FFFFFF" />
+        android:textColorHighlight="#171616" />
 
     <Button
         android:id="@+id/btnGuardarProducto"
