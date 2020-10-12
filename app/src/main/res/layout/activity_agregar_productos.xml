@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_claro3"
+    android:background="@drawable/tienda3"
     tools:context=".agregar_productos">
 
     <EditText
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginTop="360dp"
-        android:background="@drawable/degradado"
+        android:background="@drawable/fondo"
         android:text="Guardar"
         android:textColor="#151414" />
 

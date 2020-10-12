@@ -30,10 +30,19 @@ public class agregar_productos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_productos);
-        try {FloatingActionButton btnMostrarProductos = findViewById(R.id.btnMostrarProductos);
+        try {
+            FloatingActionButton btnMostrarProductos = findViewById(R.id.btnMostrarProductos);
             btnMostrarProductos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mostrarProductos();
+                }
+            });
+
+            Button btn = findViewById(R.id.btnGuardarProducto);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     guardarAmigo();
                 }
             });
@@ -49,7 +58,7 @@ public class agregar_productos extends AppCompatActivity {
             Bundle recibirParametros = getIntent().getExtras();
             accion = recibirParametros.getString("accion");
             if (accion.equals("modificar")){
-                JSONObject dataProducto = new JSONObject(recibirParametros.getString("dataProducto")).getJSONObject("value");
+                JSONObject dataProducto = new JSONObject(recibirParametros.getString("dataProdcucto")).getJSONObject("value");
 
                 TextView tempVal = (TextView)findViewById(R.id.txtNombre);
                 tempVal.setText(dataProducto.getString("Nombre"));
@@ -115,7 +124,7 @@ public class agregar_productos extends AppCompatActivity {
             String jsonDatos = parametros[0];
             BufferedReader reader;
             try {
-                URL url = new URL("Http://10.0.2.2:5984/db_tienda");
+                URL url = new URL("Http://10.0.2.2:5984/db_tienda/");
                 urlConnection = (HttpURLConnection)url.openConnection();
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);

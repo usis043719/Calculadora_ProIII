@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
             posicion = adapterContextMenuInfo.position;
-            menu.setHeaderTitle(datosJSON.getJSONObject(posicion).getString("Nombre"));
+            menu.setHeaderTitle(datosJSON.getJSONObject(posicion).getString("Marca"));
         }catch (Exception ex){
 
         }
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             ltsProductos.setAdapter(stringArrayAdapter);
 
             for (int i = 0; i < datosJSON.length(); i++) {
-                stringArrayAdapter.add(datosJSON.getJSONObject(i).getJSONObject("value").getString("Nombre"));
+                stringArrayAdapter.add(datosJSON.getJSONObject(i).getJSONObject("value").getString("Marca"));
             }
             copyStringArrayList.clear();
             copyStringArrayList.addAll(arrayList);
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog eliminarProducto(){
         AlertDialog.Builder confirmacion = new AlertDialog.Builder(MainActivity.this);
         try {
-            confirmacion.setTitle(datosJSON.getJSONObject(posicion).getJSONObject("value").getString("Nombre"));
+            confirmacion.setTitle(datosJSON.getJSONObject(posicion).getJSONObject("value").getString("Nombre del producto"));
             confirmacion.setMessage("Esta seguro de eliminar el registro?");
             confirmacion.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override

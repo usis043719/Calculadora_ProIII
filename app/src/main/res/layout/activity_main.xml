@@ -5,7 +5,7 @@
     android:id="@+id/CbOperacion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_claro"
+    android:background="@drawable/tienda3"
     tools:context=".MainActivity">
 
 
