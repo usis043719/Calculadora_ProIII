@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         obtenerDatostienda objObtenerproductos =new obtenerDatostienda();
         objObtenerproductos.execute();
 
-        FloatingActionButton btnAgregarNuevoAmigos = findViewById(R.id.btnAgregarProductos);
-        btnAgregarNuevoAmigos.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton btnAgregarNuevoProductos = findViewById(R.id.btnAgregarProductos);
+        btnAgregarNuevoProductos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 agregarNuevosProductos("nuevo", JsonObject);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
             posicion = adapterContextMenuInfo.position;
-            menu.setHeaderTitle(datosJSON.getJSONObject(posicion).getString("nombre"));
+            menu.setHeaderTitle(datosJSON.getJSONObject(posicion).getString("Nombre"));
         }catch (Exception ex){
 
         }
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("ok")) {
-                    Toast.makeText(getApplicationContext(), "Datos de amigo guardado con exito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Datos de producto guardado con exito", Toast.LENGTH_SHORT).show();
                     obtenerDatostienda objObtenerProductos = new obtenerDatostienda();
                     objObtenerProductos.execute();
                 } else {
