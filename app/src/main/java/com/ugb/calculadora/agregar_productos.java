@@ -124,7 +124,7 @@ public class agregar_productos extends AppCompatActivity {
             String jsonDatos = parametros[0];
             BufferedReader reader;
             try {
-                URL url = new URL("Http://10.0.2.2:5984/db_tienda");
+                URL url = new URL("Http://10.0.2.2:5984/db_tienda/");
                 urlConnection = (HttpURLConnection)url.openConnection();
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);
