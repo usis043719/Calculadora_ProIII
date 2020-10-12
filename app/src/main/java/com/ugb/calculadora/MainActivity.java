@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
             StringBuilder stringBuilder = new StringBuilder();
             String jsonResponse = null;
             try {
-                URL url = new URL("Http://10.0.2.2:5984/db_tienda/" +
+                URL url = new URL("Http://10.0.2.2:5984/db_tienda" +
                         datosJSON.getJSONObject(posicion).getJSONObject("value").getString("_id") + "?rev=" +
                         datosJSON.getJSONObject(posicion).getJSONObject("value").getString("_rev"));
 
