@@ -5,8 +5,8 @@
     android:id="@+id/CbOperacion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/fondo">
+    android:background="@drawable/fondo_claro"
+    tools:context=".MainActivity">
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
