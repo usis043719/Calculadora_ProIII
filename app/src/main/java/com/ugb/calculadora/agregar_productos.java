@@ -58,7 +58,7 @@ public class agregar_productos extends AppCompatActivity {
             Bundle recibirParametros = getIntent().getExtras();
             accion = recibirParametros.getString("accion");
             if (accion.equals("modificar")){
-                JSONObject dataProducto = new JSONObject(recibirParametros.getString("dataProdcucto")).getJSONObject("value");
+                JSONObject dataProducto = new JSONObject(recibirParametros.getString("dataProducto")).getJSONObject("value");
 
                 TextView tempVal = (TextView)findViewById(R.id.txtNombre);
                 tempVal.setText(dataProducto.getString("Nombre"));
@@ -104,7 +104,7 @@ public class agregar_productos extends AppCompatActivity {
                 datosProducto.put("_id",id);
                 datosProducto.put("_rev",rev);
             }
-            datosProducto.put("Nombre del producto", Nombre);
+            datosProducto.put("Nombre", Nombre);
             datosProducto.put("Marca", Marca);
             datosProducto.put("Categoria", Categoria);
             datosProducto.put("Precio", Precio);
