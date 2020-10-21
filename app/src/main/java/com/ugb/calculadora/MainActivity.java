@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
             posicion = adapterContextMenuInfo.position;
-            menu.setHeaderTitle(datosJSON.getJSONObject(posicion).getString("Marca"));
+            menu.setHeaderTitle(datosJSON.getJSONObject(posicion).getString("Nombre"));
         }catch (Exception ex){
 
         }
@@ -161,19 +161,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void mostrarDatosProductos(){
 
-     //   ListView ltsProductosCouchDB = findViewById(R.id.ltsProductosCouchDB);
-   //     try {
-     //       final ArrayList<String>arrayList = new ArrayList<>();
-      //      final ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrayList);
-  //          ltsProductosCouchDB.setAdapter(stringArrayAdapter);
-
-   //         for (int i = 0; i < datosJSON.length(); i++) {
-    //            stringArrayAdapter.add(datosJSON.getJSONObject(i).getJSONObject("value").getString("Nombre"));
- //           }
-//            stringArrayAdapter.notifyDataSetChanged(); //reactualizar datos
- //           registerForContextMenu(ltsProductosCouchDB);
-//        }catch (Exception ex){
- //           Toast.makeText(MainActivity.this, "Error al mostrar los datos: " + ex.getMessage(), Toast.LENGTH_LONG).show();
         ListView ltsProductos = findViewById(R.id.ltsProductosCouchDB);
         try {
             arrayList.clear();
@@ -181,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             ltsProductos.setAdapter(stringArrayAdapter);
 
             for (int i = 0; i < datosJSON.length(); i++) {
-                stringArrayAdapter.add(datosJSON.getJSONObject(i).getJSONObject("value").getString("Marca"));
+                stringArrayAdapter.add(datosJSON.getJSONObject(i).getJSONObject("value").getString("Nombre"));
             }
             copyStringArrayList.clear();
             copyStringArrayList.addAll(arrayList);
@@ -208,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog eliminarProducto(){
         AlertDialog.Builder confirmacion = new AlertDialog.Builder(MainActivity.this);
         try {
-            confirmacion.setTitle(datosJSON.getJSONObject(posicion).getJSONObject("value").getString("Nombre del producto"));
+            confirmacion.setTitle(datosJSON.getJSONObject(posicion).getJSONObject("value").getString("Nombre"));
             confirmacion.setMessage("Esta seguro de eliminar el registro?");
             confirmacion.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override
@@ -241,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
             StringBuilder stringBuilder = new StringBuilder();
             String jsonResponse = null;
             try {
-                URL url = new URL("Http://10.0.2.2:5984/db_tienda" +
+                URL url = new URL("Http://10.0.2.2:5984/db_tienda/" +
                         datosJSON.getJSONObject(posicion).getJSONObject("value").getString("_id") + "?rev=" +
                         datosJSON.getJSONObject(posicion).getJSONObject("value").getString("_rev"));
 
