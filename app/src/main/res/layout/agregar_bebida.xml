@@ -32,7 +32,7 @@
      android:textColor="#1C1A1A" />
 
  <EditText
-     android:id="@+id/txtPresentacion"
+     android:id="@+id/txtpresentacion"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:layout_marginTop="280dp"
