@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+ <EditText
+     android:id="@+id/txtcodigo"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="100dp"
+     android:hint="Codigo"
+     android:textColor="#1B1919" />
+
+ <EditText
+     android:id="@+id/txtdescripcion"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="160dp"
+     android:hint="Descripcion"
+     android:textColor="#1B1A1A" />
+
+ <EditText
+     android:id="@+id/txtmarca"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="220dp"
+     android:hint="Marca"
+     android:textColor="#1C1A1A" />
+
+ <EditText
+     android:id="@+id/txtPresentacion"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="280dp"
+     android:hint="Presentacion"
+     android:textColor="@color/colorAccent"
+     android:textColorHighlight="#171616" />
+
+ <EditText
+     android:id="@+id/txtprecio"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="340dp"
+     android:hint="Precio"
+     android:textColor="#1C1A1A" />
+
+ <Button
+     android:id="@+id/btnGuardarProducto"
+     android:layout_width="match_parent"
+     android:layout_height="54dp"
+     android:layout_marginTop="400dp"
+     android:background="@drawable/fondo"
+     android:text="Guardar"
+     android:textColor="#151414" />
+
+ <com.google.android.material.floatingactionbutton.FloatingActionButton
+     android:id="@+id/btnMostrarProductos"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignParentRight="true"
+     android:layout_alignParentBottom="true"
+     android:layout_marginRight="20dp"
+     android:layout_marginBottom="15dp"
+     android:src="@android:drawable/ic_menu_revert" />
+
+ <TextView
+     android:id="@+id/lbltitulo"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="50dp"
+     android:layout_marginLeft="85dp"
+     android:textSize="30dp"
+     android:text="Agregar bebida" />
+
+</RelativeLayout>
