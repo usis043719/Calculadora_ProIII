@@ -60,16 +60,16 @@ public class agregar_bebida_class extends AppCompatActivity {
                 JSONObject dataProducto = new JSONObject(recibirParametros.getString("dataProducto")).getJSONObject("value");
 
                 TextView tempVal = (TextView)findViewById(R.id.txtcodigo);
-                tempVal.setText(dataProducto.getString("Codigo"));
+                tempVal.setText(dataProducto.getString("codigo"));
+
+                tempVal = (TextView)findViewById(R.id.txtdescripcion);
+                tempVal.setText(dataProducto.getString("descripcion"));
 
                 tempVal = (TextView)findViewById(R.id.txtmarca);
-                tempVal.setText(dataProducto.getString("Marca"));
-
-                tempVal = (TextView)findViewById(R.id.txtmarca);
-                tempVal.setText(dataProducto.getString("Marca"));
+                tempVal.setText(dataProducto.getString("marca"));
 
                 tempVal = (TextView)findViewById(R.id.txtpresentacion);
-                tempVal.setText(dataProducto.getString("Presentacion"));
+                tempVal.setText(dataProducto.getString("presentacion"));
 
                 tempVal = (TextView)findViewById(R.id.txtprecio);
                 tempVal.setText(dataProducto.getString("precio"));
@@ -88,19 +88,19 @@ public class agregar_bebida_class extends AppCompatActivity {
     }
     private void guardarBebida(){
         TextView tempVal = findViewById(R.id.txtcodigo);
-        String Codigo = tempVal.getText().toString();
+        String codigo = tempVal.getText().toString();
 
         tempVal = findViewById(R.id.txtdescripcion);
-        String Descripcion = tempVal.getText().toString();
+        String descripcion = tempVal.getText().toString();
 
         tempVal = findViewById(R.id.txtmarca);
-        String Marca = tempVal.getText().toString();
+        String marca = tempVal.getText().toString();
 
         tempVal = findViewById(R.id.txtpresentacion);
-        String Presentacion = tempVal.getText().toString();
+        String presentacion = tempVal.getText().toString();
 
         tempVal = findViewById(R.id.txtprecio);
-        String Precio = tempVal.getText().toString();
+        String precio = tempVal.getText().toString();
 
 
         try {
@@ -109,11 +109,11 @@ public class agregar_bebida_class extends AppCompatActivity {
                 datosProducto.put("_id",id);
                 datosProducto.put("_rev",rev);
             }
-            datosProducto.put("Codigo", Codigo);
-            datosProducto.put("Descripcion", Descripcion);
-            datosProducto.put("Marca", Marca);
-            datosProducto.put("Presentacion", Presentacion);
-            datosProducto.put("Precio", Precio);
+            datosProducto.put("codigo", codigo);
+            datosProducto.put("descripcion", descripcion);
+            datosProducto.put("marca", marca);
+            datosProducto.put("presentacion", presentacion);
+            datosProducto.put("precio", precio);
 
             enviarDatosBebida objGuardarBebida = new enviarDatosBebida();
             objGuardarBebida.execute(datosProducto.toString());

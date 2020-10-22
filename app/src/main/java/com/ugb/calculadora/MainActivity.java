@@ -43,11 +43,21 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> arrayList =new ArrayList<String>();
     ArrayList<String> copyStringArrayList = new ArrayList<String>();
     ArrayAdapter<String> stringArrayAdapter;
+    Utilidades_Comunes uc;
+    Detectar_Internet di;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        di = new Detectar_Internet(getApplicationContext());
+        if( di.hayConexionInternet() ) {
+            conexionServidor objObtenerBebidas = new conexionServidor();
+            objObtenerBebidas.execute(uc.url_consulta, "GET");
+        } else {
+            Toast.makeText(getApplicationContext(), "No hay conexion a internet.", Toast.LENGTH_LONG).show();
+        }
 
         obtenerDatosBebida objObtenerproductos =new obtenerDatosBebida();
         objObtenerproductos.execute();
@@ -201,10 +211,14 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
-                    eliminarDatosProducto objEliminarProducto = new eliminarDatosProducto();
-                    objEliminarProducto.execute();
-
-                    Toast.makeText(getApplicationContext(), "Producto eliminado con exito.", Toast.LENGTH_SHORT).show();
+                    try {
+                        conexionServidor objEliminarProducto = new conexionServidor();
+                        objEliminarProducto.execute(uc.url_mto +
+                                datosJSON.getJSONObject(posicion).getJSONObject("value").getString("_id") + "?rev=" +
+                                datosJSON.getJSONObject(posicion).getJSONObject("value").getString("_rev"), "DELETE");
+                    }catch (Exception ex){
+                        Toast.makeText(getApplicationContext(), "Error al intentar eliminar el producto: "+ ex.getMessage() , Toast.LENGTH_LONG).show();
+                    }
                     dialogInterface.dismiss();
                 }
             });
@@ -220,6 +234,34 @@ public class MainActivity extends AppCompatActivity {
         }
         return confirmacion.create();
     }
+
+    private class conexionServidor extends AsyncTask<String,String, String> {
+        HttpURLConnection urlConnection;
+
+        @Override
+        protected String doInBackground(String... parametros) {
+            StringBuilder result = new StringBuilder();
+            try {
+                String uri = parametros[0];
+                String metodo = parametros[1];
+
+                URL url = new URL(uri);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod(metodo);
+
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String linea;
+                while ((linea = reader.readLine()) != null) {
+                    result.append(linea);
+                }
+            } catch (Exception ex) {
+                //
+            }
+            return result.toString();
+    }
+
+
     private class eliminarDatosProducto extends AsyncTask<String,String, String> {
         HttpURLConnection urlConnection;
 
@@ -273,4 +315,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+}
+
 //prueba
