@@ -1,166 +1,274 @@
 package com.ugb.calculadora;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-        public Button btnCalcular;
+    JSONArray datosJSON;
+    JSONObject JsonObject;
+    Integer posicion;
+    ArrayList<String> arrayList =new ArrayList<String>();
+    ArrayList<String> copyStringArrayList = new ArrayList<String>();
+    ArrayAdapter<String> stringArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        obtenerDatosBebida objObtenerproductos =new obtenerDatosBebida();
+        objObtenerproductos.execute();
 
-                btnCalcular = (Button) findViewById(R.id.BtnCalc);
-                btnCalcular.setOnClickListener(new View.OnClickListener()  {
-                    @Override
-                    public void onClick(View view) {
-
-                        Calcular(view);
+        FloatingActionButton btnAgregarNuevoProductos = findViewById(R.id.btnAgregarbebida);
+        btnAgregarNuevoProductos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                agregarNuevosProductos("nuevo", JsonObject);
             }
         });
-
-
+        buscarProductos();
     }
-    public void Calcular (View view)
-    {
+    void buscarProductos(){
+        final TextView tempVal = (TextView)findViewById(R.id.txtBuscarProducto);
+        tempVal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                arrayList.clear();
+                if( tempVal.getText().toString().trim().length()<1 ){//no hay texto para buscar
+                    arrayList.addAll(copyStringArrayList);
+                } else{//hacemos la busqueda
+                    for (String Producto : copyStringArrayList){
+                        if(Producto.toLowerCase().contains(tempVal.getText().toString().trim().toLowerCase())){
+                            arrayList.add(Producto);
+                        }
+                    }
+                }
+                stringArrayAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_principal, menu);
         try {
-            RadioGroup optOperaciones = (RadioGroup) findViewById(R.id.optOperaciones);
-            Spinner CbOperaciones = (Spinner)findViewById(R.id.CbOperaciones);
+            AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            posicion = adapterContextMenuInfo.position;
+            menu.setHeaderTitle(datosJSON.getJSONObject(posicion).getString("codigo"));
+        }catch (Exception ex){
 
+        }
+    }
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.mnxAgregarProducto:
+                agregarNuevosProductos("nuevo", JsonObject);
+                return true;
 
+            case R.id.mnxModificarProducto:
+                try {
+                    agregarNuevosProductos("modificar", datosJSON.getJSONObject(posicion));
+                }catch (Exception ex){}
+                return true;
 
-            TextView tempVal = (TextView) findViewById(R.id.Decimal1);
-            double num1 = Double.parseDouble(tempVal.getText().toString());
+            case R.id.mnxEliminarProducto:
 
-            tempVal = (TextView) findViewById(R.id.Decimal2);
-            double num2 = Double.parseDouble(tempVal.getText().toString());
+                AlertDialog eliminarFriend =  eliminarProducto();
+                eliminarFriend.show();
+                return true;
 
-            double respuesta = 0;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+    private class obtenerDatosBebida extends AsyncTask<Void,Void, String> {
+        HttpURLConnection urLconection;
+        @Override
+        protected String doInBackground(Void... voids) {
+            StringBuilder result = new StringBuilder();
+            try {
+                URL url = new URL("Http://10.0.2.2:5984/db_dubon_distribution_bebidas/_design/Tienda/_view/distribuidora-Dubon");
+                urLconection = (HttpURLConnection) url.openConnection();//se conecta al servidor
+                urLconection.setRequestMethod("GET");
 
-            //este es para el Radiogroups y RadioButtons
-
-            switch (optOperaciones.getCheckedRadioButtonId()) {
-                case R.id.RbSuma:
-
-                    respuesta = num1 + num2;
-
-                    break;
-
-                case R.id.RbResta   :
-
-                    respuesta = num1 - num2;
-
-                    break;
-
-                case R.id.RbMult:
-
-                    respuesta = num1 * num2;
-
-                    break;
-
-                case R.id.RbDivic:
-
-                    respuesta = num1 / num2;
-
-                    break;
-
-                case R.id.RbPorcen:
-
-                    respuesta = (num1 * num2) / 100;
-
-                    break;
-
-                case R.id.RbExpo:
-
-                    respuesta = Math.pow(num1,num2);
-
-                    break;
-
-                case R.id.RbMod:
-
-                    respuesta = num1 % num2;
-                    break;
-
-
-                case R.id.RbFactor:
-
-                    int facto = 1;
-
-                    for (int i = 2; i<= num1; i++)
-
-                    {
-                        facto = facto * i;
-
-                        respuesta = facto;
-                    }
+                InputStream in = new BufferedInputStream(urLconection.getInputStream());//obtener datos
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String linea; //lear los datos
+                while ((linea = reader.readLine()) != null) {
+                    result.append(linea);
+                }
+            } catch (Exception ex) {
+                //
             }
+            return result.toString();
+        }
 
-            //Este es para el Spinner----Combobox
-
-            switch (CbOperaciones.getSelectedItemPosition())
-            {
-                case 1:
-
-                    respuesta = num1 + num2;
-                    break;
-
-                case 2:
-
-                    respuesta = num1 - num2;
-                    break;
-
-                case 3:
-
-                    respuesta = num1 * num2;
-                    break;
-
-                case 4:
-
-                    respuesta = num1 / num2;
-                    break;
-
-                case 5:
-
-                    respuesta = (num1 * num2) / 100;
-                    break;
-
-                case 6:
-
-                    respuesta = Math.pow(num1,num2);
-                    break;
-
-                case 7:
-
-                    respuesta = num1 % num2;
-                    break;
-
-                case 8:
-
-                    int Facto = 1;
-
-                    for (int i = 2; i <= num1; i++)
-
-                    {
-                        Facto = Facto * i;
-
-                        respuesta = Facto;
-                    }
+        @Override
+        protected void onPostExecute(String s) {//recibr los datos
+            super.onPostExecute(s);
+            try {
+                JsonObject = new JSONObject(s);
+                datosJSON = JsonObject.getJSONArray("rows");
+                mostrarDatosProductos();
+            } catch (Exception ex) {
+                Toast.makeText(MainActivity.this, "Error la parsear los datos: " + ex.getMessage(), Toast.LENGTH_LONG).show();
             }
+        }
+    }
+    private void mostrarDatosProductos(){
 
-            tempVal = (TextView) findViewById(R.id.LblRespuesta);
-            tempVal.setText("La respuesta es: " + respuesta);
-        } catch (Exception error) {
+        ListView ltsProductos = findViewById(R.id.ltsProductosCouchDB);
+        try {
+            arrayList.clear();
+            stringArrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrayList);
+            ltsProductos.setAdapter(stringArrayAdapter);
 
-            Toast.makeText(getApplicationContext(),"Ingrese los dos numeros", Toast.LENGTH_LONG).show();
+            for (int i = 0; i < datosJSON.length(); i++) {
+                stringArrayAdapter.add(datosJSON.getJSONObject(i).getJSONObject("value").getString("codigo"));
+            }
+            copyStringArrayList.clear();
+            copyStringArrayList.addAll(arrayList);
+
+            stringArrayAdapter.notifyDataSetChanged();
+            registerForContextMenu(ltsProductos);
+        }catch (Exception ex){
+            Toast.makeText(MainActivity.this, "Error al mostrar los datos: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    public void agregarNuevosProductos(String accion, JSONObject jsonObject){
+        try {
+            Bundle enviarParametros = new Bundle();
+            enviarParametros.putString("accion",accion);
+            enviarParametros.putString("dataProducto",jsonObject.toString());
+
+            Intent agregarProducto = new Intent(MainActivity.this, agregar_bebida_class.class);
+            agregarProducto.putExtras(enviarParametros);
+            startActivity(agregarProducto);
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Error al llamar agregar producto: "+ e.toString(), Toast.LENGTH_LONG).show();
+        }
+    }
+    AlertDialog eliminarProducto(){
+        AlertDialog.Builder confirmacion = new AlertDialog.Builder(MainActivity.this);
+        try {
+            confirmacion.setTitle(datosJSON.getJSONObject(posicion).getJSONObject("value").getString("codigo"));
+            confirmacion.setMessage("Esta seguro de eliminar el registro?");
+            confirmacion.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    eliminarDatosProducto objEliminarProducto = new eliminarDatosProducto();
+                    objEliminarProducto.execute();
+
+                    Toast.makeText(getApplicationContext(), "Producto eliminado con exito.", Toast.LENGTH_SHORT).show();
+                    dialogInterface.dismiss();
+                }
+            });
+            confirmacion.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(getApplicationContext(), "Eliminacion cancelada por el usuario.", Toast.LENGTH_SHORT).show();
+                    dialogInterface.dismiss();
+                }
+            });
+        }catch (Exception ex){
+            Toast.makeText(getApplicationContext(), "Error al mostrar la confoirmacion: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        return confirmacion.create();
+    }
+    private class eliminarDatosProducto extends AsyncTask<String,String, String> {
+        HttpURLConnection urlConnection;
+
+        @Override
+        protected String doInBackground(String... parametros) {
+            StringBuilder stringBuilder = new StringBuilder();
+            String jsonResponse = null;
+            try {
+                URL url = new URL("Http://10.0.2.2:5984/db_dubon_distribution_bebidas/" +
+                        datosJSON.getJSONObject(posicion).getJSONObject("value").getString("_id") + "?rev=" +
+                        datosJSON.getJSONObject(posicion).getJSONObject("value").getString("_rev"));
+
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("DELETE");
+
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                String inputLine;
+                StringBuffer stringBuffer = new StringBuffer();
+                while ((inputLine = reader.readLine()) != null) {
+                    stringBuffer.append(inputLine + "\n");
+                }
+                if (stringBuffer.length() == 0) {
+                    return null;
+                }
+                jsonResponse = stringBuffer.toString();
+                return jsonResponse;
+            } catch (Exception ex) {
+                //
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                if (jsonObject.getBoolean("ok")) {
+                    Toast.makeText(getApplicationContext(), "Datos de producto guardado con exito", Toast.LENGTH_SHORT).show();
+                    obtenerDatosBebida objObtenerProductos = new obtenerDatosBebida();
+                    objObtenerProductos.execute();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error al intentar guardar datos de producto", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Error al guardar producto: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
     }
 
