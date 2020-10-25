@@ -5,8 +5,8 @@
     android:id="@+id/CbOperacion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/fondo">
+    android:background="@drawable/iclu"
+    tools:context=".MainActivity">
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -17,19 +17,22 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="15dp"
-        android:src="@android:drawable/ic_input_add" />
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/colorPrimaryDark" />
 
     <ListView
         android:id="@+id/ltsProductosCouchDB"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp" >
+        android:layout_marginTop="60dp">
 
     </ListView>
 
     <EditText
         android:id="@+id/txtBuscarProducto"
+        android:hint="Buscar Bebida"
+        android:textSize="28dp"
         android:layout_width="match_parent"
         android:layout_height="60dp" />
 
-    </RelativeLayout>
+</RelativeLayout>
