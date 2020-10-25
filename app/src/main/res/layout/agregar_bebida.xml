@@ -65,7 +65,7 @@
      android:background="@color/colorPrimaryDark"
      android:text="Guardar"
      android:textColor="@color/design_default_color_background" />
-
+//
  <Button
      android:id="@+id/btnMostrarProducto"
      android:layout_width="match_parent"
