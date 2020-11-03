@@ -1,168 +1,190 @@
 package com.ugb.calculadora;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-        public Button btnCalcular;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //defining view objects
+    private EditText TextEmail;
+    private EditText TextPassword;
+    private Button btnRegistrar, btnLogin;
+    private ProgressDialog progressDialog;
+
+
+    //Declaramos un objeto firebaseAuth
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //inicializamos el objeto firebaseAuth
+        firebaseAuth = FirebaseAuth.getInstance();
 
-                btnCalcular = (Button) findViewById(R.id.BtnCalc);
-                btnCalcular.setOnClickListener(new View.OnClickListener()  {
-                    @Override
-                    public void onClick(View view) {
+        //Referenciamos los views
+        TextEmail = (EditText) findViewById(R.id.TxtEmail);
+        TextPassword = (EditText) findViewById(R.id.TxtPassword);
 
-                        Calcular(view);
-            }
-        });
+        btnRegistrar = (Button) findViewById(R.id.botonRegistrar);
+        btnLogin = (Button) findViewById(R.id.botonLogin);
 
 
+        progressDialog = new ProgressDialog(this);
+
+        //attaching listener to button
+        btnRegistrar.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
     }
-    public void Calcular (View view)
-    {
-        try {
-            RadioGroup optOperaciones = (RadioGroup) findViewById(R.id.optOperaciones);
-            Spinner CbOperaciones = (Spinner)findViewById(R.id.CbOperaciones);
 
+    private void registrarUsuario(){
 
+        //Obtenemos el email y la contraseña desde las cajas de texto
+        String email = TextEmail.getText().toString().trim();
+        String password  = TextPassword.getText().toString().trim();
 
-            TextView tempVal = (TextView) findViewById(R.id.Decimal1);
-            double num1 = Double.parseDouble(tempVal.getText().toString());
-
-            tempVal = (TextView) findViewById(R.id.Decimal2);
-            double num2 = Double.parseDouble(tempVal.getText().toString());
-
-            double respuesta = 0;
-
-            //este es para el Radiogroups y RadioButtons
-
-            switch (optOperaciones.getCheckedRadioButtonId()) {
-                case R.id.RbSuma:
-
-                    respuesta = num1 + num2;
-
-                    break;
-
-                case R.id.RbResta   :
-
-                    respuesta = num1 - num2;
-
-                    break;
-
-                case R.id.RbMult:
-
-                    respuesta = num1 * num2;
-
-                    break;
-
-                case R.id.RbDivic:
-
-                    respuesta = num1 / num2;
-
-                    break;
-
-                case R.id.RbPorcen:
-
-                    respuesta = (num1 * num2) / 100;
-
-                    break;
-
-                case R.id.RbExpo:
-
-                    respuesta = Math.pow(num1,num2);
-
-                    break;
-
-                case R.id.RbMod:
-
-                    respuesta = num1 % num2;
-                    break;
-
-
-                case R.id.RbFactor:
-
-                    int facto = 1;
-
-                    for (int i = 2; i<= num1; i++)
-
-                    {
-                        facto = facto * i;
-
-                        respuesta = facto;
-                    }
-            }
-
-            //Este es para el Spinner----Combobox
-
-            switch (CbOperaciones.getSelectedItemPosition())
-            {
-                case 1:
-
-                    respuesta = num1 + num2;
-                    break;
-
-                case 2:
-
-                    respuesta = num1 - num2;
-                    break;
-
-                case 3:
-
-                    respuesta = num1 * num2;
-                    break;
-
-                case 4:
-
-                    respuesta = num1 / num2;
-                    break;
-
-                case 5:
-
-                    respuesta = (num1 * num2) / 100;
-                    break;
-
-                case 6:
-
-                    respuesta = Math.pow(num1,num2);
-                    break;
-
-                case 7:
-
-                    respuesta = num1 % num2;
-                    break;
-
-                case 8:
-
-                    int Facto = 1;
-
-                    for (int i = 2; i <= num1; i++)
-
-                    {
-                        Facto = Facto * i;
-
-                        respuesta = Facto;
-                    }
-            }
-
-            tempVal = (TextView) findViewById(R.id.LblRespuesta);
-            tempVal.setText("La respuesta es: " + respuesta);
-        } catch (Exception error) {
-
-            Toast.makeText(getApplicationContext(),"Ingrese los dos numeros", Toast.LENGTH_LONG).show();
+        //Verificamos que las cajas de texto no esten vacías
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(this,"Se debe ingresar un email",Toast.LENGTH_LONG).show();
+            return;
         }
+
+        if(TextUtils.isEmpty(password)){
+            Toast.makeText(this,"Falta ingresar la contraseña",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        progressDialog.setMessage("Realizando registro en linea...");
+        progressDialog.show();
+
+        //creating a new user
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //checking if success
+                        if(task.isSuccessful()){
+
+                            Toast.makeText(MainActivity.this,"Se ha registrado el usuario con el email: " + TextEmail.getText(),Toast.LENGTH_LONG).show();
+                        }else{
+                           if (task.getException() instanceof FirebaseAuthUserCollisionException){//si se presenta una colision
+                              Toast.makeText(MainActivity.this, "Este usuario ya existe", Toast.LENGTH_SHORT).show();
+                           }else{
+                            Toast.makeText(MainActivity.this,"No se pudo registrar el usuario ingrese la @,el dominio y una contraseña con 6 o mas caracteres",Toast.LENGTH_LONG).show();
+                           }
+                        }
+                        progressDialog.dismiss();
+                    }
+                });
+
     }
+
+
+    //PARA INICIAR SESION
+
+
+
+
+
+private void  loguearUsuario(){
+    //Obtenemos el email y la contraseña desde las cajas de texto
+    final String email = TextEmail.getText().toString().trim();
+    String password  = TextPassword.getText().toString().trim();
+
+    //Verificamos que las cajas de texto no esten vacías
+    if(TextUtils.isEmpty(email)){
+        Toast.makeText(this,"Se debe ingresar un email",Toast.LENGTH_LONG).show();
+        return;
+    }
+
+    if(TextUtils.isEmpty(password)){
+        Toast.makeText(this,"Falta ingresar la contraseña",Toast.LENGTH_LONG).show();
+        return;
+    }
+
+
+    progressDialog.setMessage("Iniciando sesion...");
+    progressDialog.show();
+
+    //LOGUEAR USUARIO
+    firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    //checking if success
+                    if(task.isSuccessful()){
+
+
+                        Toast.makeText(MainActivity.this,"Bienvenido" + TextEmail.getText(),Toast.LENGTH_LONG).show();
+                        int pos = email.indexOf("@");
+                        String user = email.substring(0, pos);
+                        Toast.makeText(MainActivity.this, "Bienvenido: " + TextEmail.getText(), Toast.LENGTH_LONG).show();
+                        Intent intencion = new Intent(getApplication(), Donante_Activity.class);
+                        intencion.putExtra(Donante_Activity.user, user);
+                        startActivity(intencion);
+
+                    }else{
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException){//si se presenta una colision
+                            Toast.makeText(MainActivity.this, "Este usuario ya existe", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this,"No se pudo registrar el usuario ingrese la @,el dominio y una contraseña con 6 o mas caracteres",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    progressDialog.dismiss();
+                }
+            });
 
 }
-//prueba
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+
+            case R.id.botonRegistrar:
+        //Invocamos al método:
+              registrarUsuario();
+              break;
+            case R.id.botonLogin:
+                loguearUsuario();
+                break;
+
+        }
+    }
+}

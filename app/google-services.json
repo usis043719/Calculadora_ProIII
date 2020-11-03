@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "667045364263",
+    "firebase_url": "https://covid-19-radar-de-donantes.firebaseio.com",
+    "project_id": "covid-19-radar-de-donantes",
+    "storage_bucket": "covid-19-radar-de-donantes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667045364263:android:a8ee47a6ccc0e8629c8402",
+        "android_client_info": {
+          "package_name": "com.ugb.calculadora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667045364263-ujpn33naijtunee4nghjm9la1dsdmfil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIj3yvj5tOZTlN1h_eM36gMpP7CleKr0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667045364263-ujpn33naijtunee4nghjm9la1dsdmfil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

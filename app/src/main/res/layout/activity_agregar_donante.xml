@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/vector"
+    android:padding="10dp"
+    tools:context="com.ugb.calculadora.agregar_Donantes">
+
+
+    <TextView
+        android:id="@+id/lbltitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#F6F5F5"
+        android:text="REGISTRO DONANTES DE PLASMA"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        app:drawableTint="#F6F5F5" />
+
+
+
+    <ImageView
+        android:id="@+id/imgFotoProduc"
+        android:layout_width="119dp"
+        android:layout_height="108dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/foto" />
+
+    <EditText
+        android:id="@+id/txtNombreDonante"
+        android:layout_width="396dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="150dp"
+        android:hint="Nombre"
+        android:textColor="@android:color/background_dark"
+        android:textColorHint="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/txtEdad"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="210dp"
+        android:hint="Edad"
+        android:textColorHint="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/txtTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="280dp"
+        android:hint="Telefono"
+        android:textColorHint="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/txtDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="350dp"
+        android:hint="Direccion"
+        android:textColorHint="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/txtTipo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="420dp"
+        android:hint="Tipo de sangre"
+        android:textColorHint="@android:color/background_dark" />
+
+    <Button
+        android:id="@+id/btnGuardarDonante"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="490dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Guardar Registro"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnMostrarDonante"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="545dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Mostrar lista de donantes"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+
+
+        <TextView
+            android:id="@+id/textser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.107" />
+
+
+
+
+</RelativeLayout>

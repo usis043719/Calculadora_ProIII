@@ -1,24 +1,9 @@
 <resources>
-    <string name="app_name">Calculadora</string>
-    <string name="Calculadora">Calculadora</string>
-    <string name="Num1">ingrese una cantidad</string>
-    <string name="Num2">ingrese una cantidad</string>
-
-    <string-array name="operaciones">
-    <item>selecionar:</item>
-    <item>suma </item>
-    <item>resta </item>
-    <item>divicion </item>
-    <item>multiplicacion</item>
-    <item>exponenciacion</item>
-    <item>porcentaje</item>
-    <item>mood</item>
-    <item>factorial</item>
+    <string name="app_name">Covid_19_Radar_de_donantes</string>
+    <string name="enter_email">Ingrese un correo</string>
+    <string name="enter_password">Ingrese una contraseña</string>
+    <string name="registrar">Registrar usuario</string>
+    <string name="login">Loguearse</string>
 
 
-
-
-    </string-array>
-
-
-    </resources>
+</resources>
