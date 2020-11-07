@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Verificamos que las cajas de texto no esten vacías
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Se debe ingresar un email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Se debe ingresar un correo de Gmail",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -129,7 +129,7 @@ private void  loguearUsuario(){
 
     //Verificamos que las cajas de texto no esten vacías
     if(TextUtils.isEmpty(email)){
-        Toast.makeText(this,"Se debe ingresar un email",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Se debe ingresar un correo de Gmail",Toast.LENGTH_LONG).show();
         return;
     }
 
@@ -151,7 +151,7 @@ private void  loguearUsuario(){
                     if(task.isSuccessful()){
 
 
-                        Toast.makeText(MainActivity.this,"Bienvenido" + TextEmail.getText(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"Inicio sesion" + TextEmail.getText(),Toast.LENGTH_LONG).show();
                         int pos = email.indexOf("@");
                         String user = email.substring(0, pos);
                         Toast.makeText(MainActivity.this, "Bienvenido: " + TextEmail.getText(), Toast.LENGTH_LONG).show();
@@ -163,7 +163,7 @@ private void  loguearUsuario(){
                         if (task.getException() instanceof FirebaseAuthUserCollisionException){//si se presenta una colision
                             Toast.makeText(MainActivity.this, "Este usuario ya existe", Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(MainActivity.this,"No se pudo registrar el usuario ingrese la @,el dominio y una contraseña con 6 o mas caracteres",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this,"Usuario o contraseña incorrecto",Toast.LENGTH_LONG).show();
                         }
                     }
                     progressDialog.dismiss();

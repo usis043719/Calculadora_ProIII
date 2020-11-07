@@ -4,24 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/medical_light_blue_poster_background"
     tools:context="Donante_Activity">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/medical_light_blue_poster_background"
-        android:orientation="vertical"></LinearLayout>
-
     <TextView
         android:id="@+id/textser"
-        android:layout_width="match_parent"
-        android:layout_height="706dp"
+        android:background="@drawable/bottom"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_width="237dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:layout_marginBottom="8dp"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="24sp"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -36,26 +33,27 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="35dp"
-        android:backgroundTint="#F6F5F5"
+        android:background="@drawable/bottom"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="REGISTRO DONANTES DE PLASMA"
-        android:textColor="@android:color/black"
-        android:textSize="20dp"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="15sp"
         app:drawableTint="#F6F5F5" />
 
 
     <ImageView
         android:id="@+id/imgFotoProduc"
-        android:layout_width="121dp"
-        android:layout_height="122dp"
+        android:layout_width="99dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="140dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/foto" />
 
     <EditText
         android:id="@+id/txtNombreDonante"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginTop="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="140dp"
         android:hint="Nombre"
         android:textColor="@android:color/background_dark"
         android:textColorHint="@android:color/background_dark" />
@@ -64,7 +62,7 @@
         android:id="@+id/txtEdad"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="190dp"
         android:hint="Edad"
         android:textColorHint="@android:color/background_dark" />
 
@@ -72,7 +70,7 @@
         android:id="@+id/txtTelefono"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="345dp"
+        android:layout_marginTop="255dp"
         android:hint="Telefono"
         android:textColorHint="@android:color/background_dark" />
 
@@ -80,7 +78,7 @@
         android:id="@+id/txtDireccion"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="320dp"
         android:hint="Direccion"
         android:textColorHint="@android:color/background_dark" />
 
@@ -88,29 +86,31 @@
         android:id="@+id/txtTipo"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="380dp"
         android:hint="Tipo de sangre"
         android:textColorHint="@android:color/background_dark" />
 
     <Button
         android:id="@+id/btnGuardarDonante"
-        android:layout_width="321dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="550dp"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_marginTop="460dp"
+        android:background="@drawable/bottom"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="Guardar Registro"
         android:textColor="@android:color/background_light"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/btnMostrarDonante"
-        android:layout_width="321dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="600dp"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginTop="510dp"
+        android:background="@drawable/bottom"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="Mostrar lista de donantes"
         android:textColor="@android:color/background_light"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
+
+
 </RelativeLayout>

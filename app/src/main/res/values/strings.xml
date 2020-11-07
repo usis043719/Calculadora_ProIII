@@ -3,7 +3,7 @@
     <string name="enter_email">Ingrese un correo</string>
     <string name="enter_password">Ingrese una contraseña</string>
     <string name="registrar">Registrar usuario</string>
-    <string name="login">Loguearse</string>
+    <string name="login">Iniciar sesion</string>
 
 
 </resources>
