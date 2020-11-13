@@ -10,14 +10,11 @@
 
     <TextView
         android:id="@+id/textser"
-        android:background="@drawable/bottom"
-        android:backgroundTint="@color/colorPrimaryDark"
         android:layout_width="237dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="8dp"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,12 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Donante_Activity extends AppCompatActivity {
-    //Button lista;
 
     //No tocar
     public static final String user="names";
         TextView txtUser;
-
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +21,12 @@ public class Donante_Activity extends AppCompatActivity {
 
             ///Codigo del login msgbox
             txtUser =(TextView)findViewById(R.id.textser);
-            String user = getIntent().getStringExtra("names");
-            txtUser.setText("¡Bienvenid@ " + user +"!");
+            //String user = getIntent().getStringExtra("names");
+           // txtUser.setText("¡Bienvenid@ " + user +"!");
             //No tocar
 
 
-            //Codigo del boton lista de donantes
+            
 
         }
 

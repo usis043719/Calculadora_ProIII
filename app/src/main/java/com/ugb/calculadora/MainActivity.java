@@ -142,7 +142,7 @@ private void  loguearUsuario(){
     progressDialog.setMessage("Iniciando sesion...");
     progressDialog.show();
 
-    //LOGUEAR USUARIO
+    //INICIO DE SESION
     firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -150,13 +150,10 @@ private void  loguearUsuario(){
                     //checking if success
                     if(task.isSuccessful()){
 
-
-                        Toast.makeText(MainActivity.this,"Inicio sesion" + TextEmail.getText(),Toast.LENGTH_LONG).show();
-                        int pos = email.indexOf("@");
-                        String user = email.substring(0, pos);
-                        Toast.makeText(MainActivity.this, "Bienvenido: " + TextEmail.getText(), Toast.LENGTH_LONG).show();
-                        Intent intencion = new Intent(getApplication(), Donante_Activity.class);
-                        intencion.putExtra(Donante_Activity.user, user);
+//detalles
+                        Toast.makeText(MainActivity.this,"Inicio Sesion " + TextEmail.getText(),Toast.LENGTH_LONG).show();
+                        Intent intencion = new Intent (getApplication(), Donante_Activity.class);
+                        intencion.putExtra(Donante_Activity.user, email);
                         startActivity(intencion);
 
                     }else{
