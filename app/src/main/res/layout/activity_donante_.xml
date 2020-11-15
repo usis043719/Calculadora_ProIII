@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/medical_light_blue_poster_background"
-    tools:context="Donante_Activity">
+    android:background="@drawable/medical_light_blue_poster_background">
+
+
 
 
     <TextView
@@ -37,14 +38,14 @@
         android:textSize="15sp"
         app:drawableTint="#F6F5F5" />
 
-
     <ImageView
-        android:id="@+id/imgFotoProduc"
+        android:id="@+id/imgFoto"
         android:layout_width="99dp"
         android:layout_height="80dp"
         android:layout_marginLeft="140dp"
         android:layout_marginTop="60dp"
-        android:background="@drawable/foto" />
+        android:background="@drawable/bottom" />
+
 
     <EditText
         android:id="@+id/txtNombreDonante"
@@ -87,27 +88,26 @@
         android:hint="Tipo de sangre"
         android:textColorHint="@android:color/background_dark" />
 
+    <EditText
+        android:id="@+id/txtCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="440dp"
+        android:hint="Correo"
+        android:textColorHint="@android:color/background_dark" />
+
     <Button
         android:id="@+id/btnGuardarDonante"
         android:layout_width="match_parent"
         android:layout_height="34dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="500dp"
         android:background="@drawable/bottom"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Guardar Registro"
         android:textColor="@android:color/background_light"
         android:textSize="15sp" />
 
-    <Button
-        android:id="@+id/btnMostrarDonante"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginTop="510dp"
-        android:background="@drawable/bottom"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Mostrar lista de donantes"
-        android:textColor="@android:color/background_light"
-        android:textSize="15sp" />
+
 
 
 </RelativeLayout>

@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRegistrar = (Button) findViewById(R.id.botonRegistrar);
         btnLogin = (Button) findViewById(R.id.botonLogin);
 
-
         progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
