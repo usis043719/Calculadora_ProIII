@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -17,10 +18,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,8 +38,11 @@ public class Donante_Activity extends AppCompatActivity {
     ImageView imgFoto;
     Intent takePictureIntent;
     String urlCompletaImg;
+    String urlCompletaImgFirestore;
     DatabaseReference mDatabse;
     MyFirebaseInstanceIdService myFirebaseInstanceIdService = new MyFirebaseInstanceIdService();
+    String miToken;
+
     //No tocar login
     public static final String user="names";
         TextView txtUser;
@@ -51,51 +61,14 @@ public class Donante_Activity extends AppCompatActivity {
             imgFoto = findViewById(R.id.imgFoto);
             tomarFoto();
             try {
-                final String miToken = myFirebaseInstanceIdService.miToken;
-                mDatabse = FirebaseDatabase.getInstance().getReference("donantes");
-
-                Button btnGuardarDonante = findViewById(R.id.btnGuardarDonante);
-                btnGuardarDonante.setOnClickListener(new View.OnClickListener() {
+                mDatabse = FirebaseDatabase.getInstance().getReference("usuarios");
+                miToken = myFirebaseInstanceIdService.miToken;
+                Button btnGuardarRegistro = findViewById(R.id.btnGuardarDonante);
+                btnGuardarRegistro.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         try {
-                            TextView tempVal = findViewById(R.id.txtNombreDonante);
-                            String nombre = tempVal.getText().toString();
-
-                            TextView tempVal1 = findViewById(R.id.txtEdad);
-                            String edad = tempVal1.getText().toString();
-
-                            TextView tempVal2 = findViewById(R.id.txtDireccion);
-                            String direccion = tempVal2.getText().toString();
-
-                            TextView tempVal3 = findViewById(R.id.txtTelefono);
-                            String telefono = tempVal3.getText().toString();
-
-                            TextView tempVal4 = findViewById(R.id.txtTipo);
-                            String tipoSangre = tempVal4.getText().toString();
-
-                            TextView tempVal5 = findViewById(R.id.txtCorreo);
-                            String correo = tempVal5.getText().toString(),
-
-                                    id = mDatabse.push().getKey();
-                            donantes user = new donantes(nombre, correo, urlCompletaImg, miToken, edad, direccion,telefono,tipoSangre);
-                            if (id != null) {
-                                mDatabse.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(getApplicationContext(), "Registro Guardado con exito", Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(getApplicationContext(), lista_donantes.class);
-                                        startActivity(intent);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getApplicationContext(), "Erro al intentar crear el registro en la base de datos", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Erro al intentar crear el registro en la base de datos", Toast.LENGTH_LONG).show();
-                            }
+                            subirFileFirestore();
                         } catch (Exception ex) {
                             Toast.makeText(getApplicationContext(), "Erro al intentar guardar el registro: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -106,6 +79,83 @@ public class Donante_Activity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Erro: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
+    private void subirFileFirestore(){
+        Toast.makeText(getApplicationContext(), "Te informaremos cuando la foto se suba a firestoire",Toast.LENGTH_SHORT).show();
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        Uri file = Uri.fromFile(new File(urlCompletaImg));
+        final StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+
+        final UploadTask uploadTask = riversRef.putFile(file);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "Fallo el intento de subir la foto a firestore: "+ e.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getApplicationContext(), "Listo se subio la foto a firestore",Toast.LENGTH_SHORT).show();
+                Task<Uri> downloadUri = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        return riversRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if(task.isSuccessful()) {
+                            urlCompletaImgFirestore = task.getResult().toString();
+                            guardarDatosFirebase();
+                        }
+                    }
+                });
+            }
+        });
+    }
+    private void guardarDatosFirebase(){
+        try {
+            TextView tempVal = findViewById(R.id.txtNombreDonante);
+            String Nombre = tempVal.getText().toString();
+
+            TextView tempVal5 = findViewById(R.id.txtCorreo);
+            String correo = tempVal5.getText().toString();
+
+            TextView tempVal1 = findViewById(R.id.txtEdad);
+            String edad = tempVal1.getText().toString();
+
+            TextView tempVal3 = findViewById(R.id.txtTelefono);
+            String telefono = tempVal3.getText().toString();
+
+            TextView tempVal2 = findViewById(R.id.txtDireccion);
+            String direccion = tempVal2.getText().toString();
+
+            TextView tempVal4 = findViewById(R.id.txtTipo);
+            String tipoSangre = tempVal4.getText().toString(),
+
+                    id = mDatabse.push().getKey();
+            donantes user = new donantes(Nombre,correo, urlCompletaImg, urlCompletaImgFirestore, miToken ,edad ,telefono,direccion,tipoSangre);
+            if (id != null) {
+                mDatabse.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext(), "Registro Guardado con exito", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), lista_donantes.class);
+                        startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Erro al intentar crear el registro en la base de datos: "+e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            } else {
+                Toast.makeText(getApplicationContext(), "Erro al intentar crear el registro en la base de datos", Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception ex){
+
+        }
+    }
     void tomarFoto(){
         imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +173,7 @@ public class Donante_Activity extends AppCompatActivity {
                             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(takePictureIntent, 1);
                         }catch (Exception ex){
-                            Toast.makeText(getApplicationContext(), "Error Toma Foto: "+ ex.getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Erro Toma Foto: "+ ex.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -139,7 +189,7 @@ public class Donante_Activity extends AppCompatActivity {
                 imgFoto.setImageBitmap(imageBitmap);
             }
         }catch (Exception ex){
-            Toast.makeText(getApplicationContext(), "Error: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Erro: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
     private File createImageFile() throws IOException {

@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,12 +36,31 @@ public class lista_donantes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_donantes);
 
+        ltsDonantes = findViewById(R.id.ltsDonantes);
         mostrarListadoUsuarios();
+
+        ltsDonantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("user", datosJSONArray.getJSONObject(position).getString("user"));
+                    bundle.putString("to", datosJSONArray.getJSONObject(position).getString("to"));
+                    bundle.putString("from", datosJSONArray.getJSONObject(position).getString("from"));
+                    bundle.putString("urlFoto", datosJSONArray.getJSONObject(position).getString("urlFoto"));
+                    bundle.putString("urlFotoFirestore", datosJSONArray.getJSONObject(position).getString("urlFotoFirestore"));
+
+                    Intent intent = new Intent(getApplicationContext(), chats.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }catch (Exception ex){
+                    Toast.makeText(getApplicationContext(), "Error al seleccionar el usuario a chatear: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
     private void mostrarListadoUsuarios(){
-        ltsDonantes = findViewById(R.id.ltsDonantes);
-
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("donantes");
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("usuarios");
         mDatabaseReference.orderByChild("token").equalTo(myFirebaseInstanceIdService.miToken).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,11 +88,19 @@ public class lista_donantes extends AppCompatActivity {
                     for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                         donantes user = dataSnapshot.getValue(donantes.class);
                         stringArrayList.add(user);
+
+                        datosJSONObject = new JSONObject();
+                        datosJSONObject.put("user", user.getUserName());
+                        datosJSONObject.put("to", user.getToken());
+                        datosJSONObject.put("from", myFirebaseInstanceIdService.miToken);
+                        datosJSONObject.put("urlFoto", user.getUrlFoto());
+                        datosJSONObject.put("urlFotoFirestore", user.getUrlFotoFirestore());
+                        datosJSONArray.put(datosJSONObject);
                     }
                     adaptadorImagenes adaptadorImg = new adaptadorImagenes(getApplicationContext(), stringArrayList);
                     ltsDonantes.setAdapter(adaptadorImg);
                 }catch (Exception ex){
-                    Toast.makeText(getApplicationContext(), "Error al recuperar los amigos: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error al recuperar los donantes: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -79,7 +108,7 @@ public class lista_donantes extends AppCompatActivity {
 
             }
         });
-    }
+    }////////////REVISAR AQUIIIII la class
     private void registrarUsuario(){
         Intent intent = new Intent(getApplicationContext(), Donante_Activity.class);
         startActivity(intent);

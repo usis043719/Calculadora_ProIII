@@ -1,20 +1,34 @@
 package com.ugb.calculadora;
 
 public class donantes {
-    String userName, email, urlFoto, token, edad, telefono, direccion, tipoSangre ;
+    String userName, email, urlFoto,urlFotoFirestore, token, edad, telefono, direccion, tipoSangre ;
 
     public donantes() {}
 
-    public donantes(String userName, String email, String urlFoto, String token , String edad , String telefono, String direccion, String tipoSangre) {
+    public donantes(String userName, String email, String urlFoto, String urlFotoFirestore, String token , String edad , String telefono, String direccion, String tipoSangre) {
         this.userName = userName;
         this.email = email;
         this.urlFoto = urlFoto;
+        this.urlFotoFirestore = urlFotoFirestore;
         this.token = token;
         this.edad = edad;
         this.telefono = telefono;
         this.direccion = direccion;
         this.tipoSangre = tipoSangre;
     }
+
+    //public donantes(String nombre, String urlCompletaImg, String urlCompletaImgFirestore, String miToken) {
+   // }
+
+
+    public String getUrlFotoFirestore() {
+        return urlFotoFirestore;
+    }
+
+    public void setUrlFotoFirestore(String urlFotoFirestore) {
+        this.urlFotoFirestore = urlFotoFirestore;
+    }
+
     public String getUserName() {
             return userName;
     }

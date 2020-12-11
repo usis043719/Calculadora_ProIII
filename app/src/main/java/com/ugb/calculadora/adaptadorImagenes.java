@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -44,14 +45,15 @@ public class adaptadorImagenes extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         layoutInflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View itemView = layoutInflater.inflate(R.layout.listview_imagenes, viewGroup, false);
-        TextView textView = (TextView)itemView.findViewById(R.id.txtTitulo);
-        ImageView imageView = (ImageView)itemView.findViewById(R.id.img);
+        final TextView textView = (TextView)itemView.findViewById(R.id.txtTitulo);
+        final ImageView imageView = (ImageView)itemView.findViewById(R.id.img);
         try {
             user = datos.get(i);
             textView.setText(user.getUserName());
-            Bitmap imageBitmap = BitmapFactory.decodeFile(user.getUrlFoto());
-            imageView.setImageBitmap(imageBitmap);
-        }catch (Exception ex){ }
+            Glide.with(context).load(user.getUrlFotoFirestore()).into(imageView);
+        }catch (Exception ex){
+            textView.setText(ex.getMessage());
+        }
         return itemView;
     }
 }
